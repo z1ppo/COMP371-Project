@@ -57,7 +57,21 @@ void RailCamera::Update(float dt)
 	float theta = radians(mHorizontalAngle);
 	float phi = radians(mVerticalAngle);
 
-	mLookAt = vec3(cosf(phi)*cosf(theta), sinf(phi), -cosf(phi)*sinf(theta));
+
+
+	int kFrame = 0; // initialize  key frame index 0
+	while(World::GetInstance()->mAnimation[1]->mKeyTime[kFrame+1] < World::GetInstance()->mAnimation[1]->mCurrentTime){ // gets index of last key frame  that occured by looping through frame time values.
+		kFrame ++;
+	}
+	int kFrame2 =0;
+	while(World::GetInstance()->mAnimation[0]->mKeyTime[kFrame2+1] < World::GetInstance()->mAnimation[0]->mCurrentTime){ // gets index of last key frame  that occured by looping through frame time values.
+		kFrame2 ++;
+	}
+	float tNorm =  (World::GetInstance()->mAnimation[1]->mCurrentTime - World::GetInstance()->mAnimation[1]->mKeyTime[kFrame])/(World::GetInstance()->mAnimation[1]->mKeyTime[kFrame+1] - World::GetInstance()->mAnimation[1]->mKeyTime[kFrame]);
+	float tNorm2 =  (World::GetInstance()->mAnimation[0]->mCurrentTime - World::GetInstance()->mAnimation[0]->mKeyTime[kFrame2])/(World::GetInstance()->mAnimation[0]->mKeyTime[kFrame2+1] - World::GetInstance()->mAnimation[0]->mKeyTime[kFrame2]);
+	 mPosition = glm::mix(World::GetInstance()->mAnimation[1]->mKey[kFrame].GetPosition(),World::GetInstance()->mAnimation[1]->mKey[kFrame+1].GetPosition(),tNorm)+ vec3(0,10.0f,0);
+	//mLookAt = vec3(cosf(phi)*cosf(theta), sinf(phi), -cosf(phi)*sinf(theta));
+	mLookAt =  (glm::mix(World::GetInstance()->mAnimation[0]->mKey[kFrame2].GetPosition(),World::GetInstance()->mAnimation[0]->mKey[kFrame2+1].GetPosition(),tNorm2)- mPosition);
 	
 	vec3 sideVector = glm::cross(mLookAt, vec3(0.0f, 1.0f, 0.0f));
 	glm::normalize(sideVector);
@@ -85,13 +99,8 @@ void RailCamera::Update(float dt)
 	//vec3 *mpos = new vec3;
 	//mpos = Animation::gspos;
 
-	int kFrame = 0; // initialize  key frame index 0
-	while(World::GetInstance()->mAnimation[1]->mKeyTime[kFrame+1] < World::GetInstance()->mAnimation[1]->mCurrentTime){ // gets index of last key frame  that occured by looping through frame time values.
-		kFrame ++;
-	}
-	float tNorm =  (World::GetInstance()->mAnimation[1]->mCurrentTime - World::GetInstance()->mAnimation[1]->mKeyTime[kFrame])/(World::GetInstance()->mAnimation[1]->mKeyTime[kFrame+1] - World::GetInstance()->mAnimation[1]->mKeyTime[kFrame]);
-
-	 mPosition = glm::mix(World::GetInstance()->mAnimation[1]->mKey[kFrame].GetPosition(),World::GetInstance()->mAnimation[1]->mKey[kFrame+1].GetPosition(),tNorm)+ vec3(0,10.0f,0);
+	
+	
 }
 
 
