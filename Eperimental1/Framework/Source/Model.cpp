@@ -125,16 +125,18 @@ glm::mat4 Model::GetWorldMatrix() const
 	// @TODO 2 - You must build the world matrix from the position, scaling and rotation informations
     //           If the model has an animation, get the world transform from the animation.
 	mat4 worldMatrix(1.0f);
+	mat4 anim4(1.0f);
     
 	//return worldMatrix;
 	if(mAnimation){ // If the model has an animation, the world matrix is retrived through it's animation.
-		mat4 anim4 =  mAnimation->GetAnimationWorldMatrix();
-		return anim4;
+		
+		anim4 =  mAnimation->GetAnimationWorldMatrix();
+		return anim4;//return anim4;
 	}//otherwise
 	mat4 rotate4 = glm::rotate(worldMatrix, GetRotationAngle(),GetRotationAxis()); //get rotation matrix
 	mat4 scale4 = glm::scale(worldMatrix,GetScaling()); // get scale matrix
 	mat4 translate4 = glm::translate(worldMatrix,GetPosition()); // get translation matrix
-	return translate4*rotate4*scale4; //matrix chain
+	return translate4*rotate4*scale4*anim4; //matrix chain
 	
 }	
 

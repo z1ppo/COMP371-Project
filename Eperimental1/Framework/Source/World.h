@@ -32,14 +32,14 @@ public:
 	void LoadScene(const char * scene_path);
     Animation* FindAnimation(ci_string animName);
 	AnimationKey* FindAnimationKey(ci_string keyName);
-	
+	std::vector<Model*> mModel;
 	Animation* GetmAnimation(int i);
 	static glm::vec3 gspos();
 
-private:
+protected:
     static World* instance;
 	std::vector<Animation*> mAnimation;
-	std::vector<Model*> mModel;
+	
   
     std::vector<AnimationKey*> mAnimationKey;
 	std::vector<Camera*> mCamera;

@@ -10,13 +10,15 @@
 #pragma once
 
 #include "Model.h"
+#include <list>
 
 class SphereModel : public Model
 {
 public:
 	SphereModel(glm::vec3 size = glm::vec3(1.0f, 1.0f, 1.0f));
     virtual ~SphereModel(void);
-
+	glm::vec3 color;
+	void SphereModel::ChangeColor();
     virtual void Update(float dt);
     virtual void Draw();
     
@@ -31,6 +33,7 @@ private:
         glm::vec3 normal;
         glm::vec3 color;
     };
+	std::vector<Vertex> mVertexBuffer;
 
     unsigned int mVertexArrayID;
     unsigned int mVertexBufferID;
