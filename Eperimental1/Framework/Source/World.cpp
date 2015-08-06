@@ -17,6 +17,7 @@
 
 #include "CubeModel.h"
 #include "ChairModel.h"
+#include "Projectile.h"
 #include "SphereModel.h"
 #include "Animation.h"
 
@@ -236,7 +237,7 @@ void World::LoadScene(const char * scene_path)
 				mAnimation.push_back(anim);
 			}else if(result == "cModel")
 			{
-				ChairModel* chair = new ChairModel();
+				Projectile* chair = new Projectile(mModel[1]);
 				chair->Load(iss);
 				mModel.push_back(chair);
 			}
