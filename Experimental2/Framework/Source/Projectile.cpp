@@ -19,21 +19,23 @@
 
 using namespace glm;
 
-Projectile::Projectile(vec3 Parent) 
+Projectile::Projectile(vec3 Parent)
 {
+	time = 0;
+	lifetime =5.0;
 	vec3 size(1.0f);
 	color = vec3 (1.0f, 0.05f, 0.05f); 
-	SphereModel* bullet = new SphereModel(vec3(1.0f));
-	vec3 aim = World::GetInstance()->mModel[3]->GetPosition() - Parent;
-	aim = glm::normalize(aim);
+	SphereModel::SphereModel(size);
+	aim = World::GetInstance()->mModel[3]->GetPosition() - Parent;
+	aim = glm::normalize(aim);//vec3(1.0, 0.0, 0.0); //
 }
 Projectile::Projectile() 
 {
 	vec3 size(1.0f);
 	color = vec3 (1.0f, 0.05f, 0.05f); 
 	SphereModel* bullet = new SphereModel(vec3(1.0f));
-	vec3 aim = World::GetInstance()->mModel[3]->GetPosition() - World::GetInstance()->mModel[1]->GetPosition();
-	aim = glm::normalize(aim);
+	//vec3 aim = World::GetInstance()->mModel[3]->GetPosition() - World::GetInstance()->mModel[1]->GetPosition();
+	aim = vec3(1.0, 0.0, 0.0); //glm::normalize(aim);
 }
 	
 	
@@ -55,10 +57,15 @@ void Projectile::ChangeColor(){
 void Projectile::Update(float dt)
 {
 	//for (list<Billboard*>::iterator it = mBillboardList.begin(); it != mBillboardList.end(); ++it)
-	vec3 travel = aim * dt;
-	mat4 translate4 = glm::translate(mat4(1.0f), travel);
-	vec4 tempPos = translate4*vec4(bullet.GetPosition(),1.0f) ;
-	bullet.SetPosition(vec3(tempPos.x,tempPos.y,tempPos.z));
+	//vec3 travel = aim * dt;
+	//mat4 translate4 = glm::translate(mat4(1.0f), travel);
+	//vec4 tempPos = translate4*vec4(GetPosition(),1.0f) ;
+	//SetPosition(vec3(tempPos.x,tempPos.y,tempPos.z));
+	this->SetPosition(this->GetPosition()+(aim*dt));
+	time+=dt;
+	if(time >= lifetime){
+		//Projectile::~Projectile();
+	}
 	bullet.Update(dt);
 }
 
@@ -67,7 +74,8 @@ void Projectile::Draw()
     // Draw the Vertex Buffer
     // Note this draws a unit Cube
     // The Model View Projection transforms are computed in the Vertex Shader
-   bullet.Draw();
+   //bullet.Draw();
+   SphereModel::Draw();
 }
 
 bool Projectile::ParseLine(const std::vector<ci_string> &token)

@@ -15,12 +15,13 @@
 class ChairModel : public Model
 {
 public:
-	ChairModel(int texture,glm::vec3 size = glm::vec3(1.0f, 1.0f, 1.0f));
+	ChairModel(int texture);
 	virtual ~ChairModel();
-	Projectile bullet;
+	Projectile* bullet;
 	virtual void Update(float dt);
 	virtual void Draw();
 	int mTextureID;
+	
 
 protected:
 	virtual bool ParseLine(const std::vector<ci_string> &token);

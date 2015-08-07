@@ -3,19 +3,21 @@
 #include "SphereModel.h"
 #include <list>
 
-class Projectile : public Model
+class Projectile : public SphereModel
 {
 public:
 	Projectile::Projectile() ;
 	Projectile(glm::vec3 Parent);
     virtual ~Projectile(void);
 	SphereModel bullet;
+	float time;
+	float lifetime;
 	glm::vec3 aim;
 	glm::vec3 color;
 	Model* mParent;
 	void Projectile::ChangeColor();
     virtual void Update(float dt);
-    virtual void Draw();
+	virtual void Draw();
     
 protected:
     virtual bool ParseLine(const std::vector<ci_string> &token);

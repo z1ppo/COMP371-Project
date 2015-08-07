@@ -45,9 +45,9 @@ public:
 	
 	glm::vec3 lightColor;// = vec3(1.0f, 1.0f, 1.0f);
 	float lightKc;// = 0.0f;
-	float lightKl;// = 0.0f;
-	float lightKq;// = 1.0f;
-	glm::vec4 lightPosition;//(2.0f, 2.0f, -2.0f, 1.0f);
+	float lightKl;//= 0.0f;
+	float lightKq;//  = 1.0f;
+	glm::vec4 lightPosition;// = vec4(2.0f, 2.0f, -2.0f, 1.0f);
 	// Material Coefficients
 	float ka ;
 	float kd ;
