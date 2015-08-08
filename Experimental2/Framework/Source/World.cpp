@@ -51,7 +51,7 @@ World::World()
 	// Light Coefficients
 	
 	lightColor =  glm::vec3(1.0f, 1.0f, 1.0f);
-	lightPosition = glm::vec4(2.0f, 2.0f, -2.0f, 1.0f);
+	lightPosition = glm::vec4(2.0f, 2.0f, -2.0f, 0.0f);
 	lightKc = 0.0f;
 	lightKl = 0.0f;
 	lightKq = 1.0f;
@@ -318,7 +318,7 @@ void World::LoadScene(const char * scene_path)
 				// this is a comment line
 			}else if(result == "cModel")
 			{
-				int shipTextureID = TextureLoader::LoadTexture("../Assets/Textures/ship2.jpg");
+				int shipTextureID = TextureLoader::LoadTexture("../Assets/Textures/ship1.jpg");
 				ShipModel* chair = new ShipModel(shipTextureID);
 				chair->Load(iss);
 				mModel.push_back(chair);

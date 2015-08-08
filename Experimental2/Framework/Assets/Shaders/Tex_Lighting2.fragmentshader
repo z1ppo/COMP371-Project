@@ -65,7 +65,7 @@ void main()
 		SpecCoef = min(1.0, SpecCoef);
 		SpecCoef = max(0.0, SpecCoef);
 	}
-	vec3 DifEl =  lightColor * materialDiffuse * DifCoef;
+	vec3 DifEl =  tcolor3 * materialDiffuse * DifCoef;
 	vec3 SpecEl =  lightColor * materialSpecular * pow(SpecCoef,materialExponent);
 	vec3 SumDifSpec =  (DifEl + SpecEl);
 	vec3 col3 = AmbEl + lAttenuation * SumDifSpec;
