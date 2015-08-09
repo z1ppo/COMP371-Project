@@ -22,9 +22,12 @@
 #include "EventManager.h"
 #include "TextureLoader.h"
 
+#include "RailCamera.h"
 #include "ChairModel.h"
 #include "ShipModel.h"
-#include "RailCamera.h"
+#include "ShipEnnemyModel.h"//TINO
+
+
 
 #include "ParticleDescriptor.h"
 #include "ParticleEmitter.h"
@@ -47,7 +50,7 @@ World::World()
 //	mCamera.push_back(new StaticCamera(vec3(0.5f,  0.5f, 5.0f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f)));
 	mCamera.push_back(new RailCamera(vec3(3.0f,  3.0f, 3.0f)));
 
-	mCurrentCamera = 0;
+	mCurrentCamera = 2;
 	// Light Coefficients
 	
 	lightColor =  glm::vec3(1.0f, 1.0f, 1.0f);
@@ -318,10 +321,55 @@ void World::LoadScene(const char * scene_path)
 				// this is a comment line
 			}else if(result == "cModel")
 			{
+				int shipTextureID = TextureLoader::LoadTexture("../Assets/Textures/ship1.jpg");
+				ShipModel* chair = new ShipModel(shipTextureID);
+				chair->Load(iss);
+				mModel.push_back(chair);
+			}else if(result == "eModel")
+			{
 				int shipTextureID = TextureLoader::LoadTexture("../Assets/Textures/ship2.jpg");
 				ShipModel* chair = new ShipModel(shipTextureID);
 				chair->Load(iss);
 				mModel.push_back(chair);
+
+				//TINO set X borders for ennemies
+				float lBound = -10.0f;
+				float uBound = 10.0f;
+
+				//TINO position
+				//positionX will be generated randomly between -5 and 5
+				float ennemyPositionX = lBound + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(uBound-lBound)));
+				float ennemyPositionZ = 10.0f;
+
+				//TINO 10 ennemies
+				ShipEnnemyModel* ennemy[10];
+
+				//TINO set up the ennemis
+				for(int i=0; i<10;i++){
+					ennemy[i] = new ShipEnnemyModel(shipTextureID);
+					ennemy[i]->Load(iss);
+					vec3 EnnemyPosition = vec3(ennemyPositionX, 0.0f, ennemyPositionZ);//just modify x and z
+					vec3 EnnemySize = vec3(0.1f, 0.1f, 0.1f);
+					ennemy[i]->SetPosition(EnnemyPosition);
+					ennemy[i]->SetScaling(EnnemySize);
+					mModel.push_back(ennemy[i]);
+
+					ennemyPositionZ += 5.0f;//next ennemy will be 10 step further in Z
+
+					//update X random position for next ennemy
+					ennemyPositionX = lBound + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(uBound-lBound)));
+				}
+
+
+				//TINO
+				/*ShipEnnemyModel* chair2 = new ShipEnnemyModel(shipTextureID);
+				chair2->Load(iss);
+				vec3 EnnemyPosition = vec3(0.0f, 0.0f, 10.0f);//just modify x and z
+				vec3 EnnemySize = vec3(0.1f, 0.1f, 0.1f);
+				chair2->SetPosition(EnnemyPosition);
+				chair2->SetScaling(EnnemySize);
+				mModel.push_back(chair2);*/
+
 			}
 			else
 			{
