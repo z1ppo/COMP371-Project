@@ -55,7 +55,7 @@ World::World()
 	// Light Coefficients
 	
 	lightColor =  glm::vec3(1.0f, 1.0f, 1.0f);
-	lightPosition = glm::vec4(2.0f, 2.0f, -2.0f, 1.0f);
+	lightPosition = glm::vec4(2.0f, 2.0f, -2.0f, 0.0f);
 	lightKc = 0.0f;
 	lightKl = 0.0f;
 	lightKq = 1.0f;

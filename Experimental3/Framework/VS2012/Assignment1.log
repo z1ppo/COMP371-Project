@@ -1,4 +1,4 @@
-﻿Build started 8/9/2015 12:07:21 AM.
+﻿Build started 8/9/2015 12:14:07 AM.
      1>Project "C:\Users\Paul\Documents\GitHub\COMP371-Project\Experimental3\Framework\VS2012\Assignment1.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"../ThirdParty/DevIL/DevILx86-1.7.8/include" /I../ThirdParty/assimp/include /I"../ThirdParty/FreeImage-3170/Source" /I"../ThirdParty/glew-1.10.0/include" /I"../ThirdParty/glfw-3.0.4/include" /I../ThirdParty/glm /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"C:\Users\Paul\Documents\GitHub\COMP371-Project\Experimental3\Framework\VS2012\/../Build/Debug/" /Fd"C:\Users\Paul\Documents\GitHub\COMP371-Project\Experimental3\Framework\VS2012\/../Build/Debug/vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\Source\World.cpp
@@ -36,4 +36,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.44
+Time Elapsed 00:00:03.51
