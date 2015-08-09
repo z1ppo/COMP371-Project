@@ -108,6 +108,7 @@ World::World()
      */    // TMP
 
 	nextProjectile = 0;
+	spawntime = 0.0f;
 
 	shipTextureID = TextureLoader::LoadTexture("../Assets/Textures/ship1.jpg");
 
@@ -177,6 +178,8 @@ World* World::GetInstance()
 void World::Update(float dt)
 {
 	// User Inputs
+	spawntime+=dt;
+
 	// 0 1 2 to change the Camera
 	if (glfwGetKey(EventManager::GetWindow(), GLFW_KEY_1 ) == GLFW_PRESS)
 	{
@@ -534,4 +537,7 @@ nextProjectile++;
 	if (nextProjectile >= 15){
 		nextProjectile-= 15;
 	}
+}
+void World::ResetSpawnTime(){
+	spawntime = 0.0f;
 }

@@ -26,6 +26,8 @@ public:
 	virtual void Update(float dt);
 	virtual void Draw();
 	virtual void Fire();
+	virtual void Spawn();
+	virtual void Reset();
 	int mTextureID;
 	sceneLoader* droidScene;
 

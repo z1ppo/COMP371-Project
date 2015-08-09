@@ -66,11 +66,13 @@ public:
 	float kd ;
 	float ks ;
 	float n ;
+	float spawntime;
 	std::vector<Model*> mModel;
 	std::vector<Projectile*> mProjectile;
 	std::vector<ShipEnnemyModel*> mShipEnnemyModel;
 	Animation* GetmAnimation(int i);
 	void LoadNextProjectile();
+	void ResetSpawnTime();
     
 private:
     static World* instance;

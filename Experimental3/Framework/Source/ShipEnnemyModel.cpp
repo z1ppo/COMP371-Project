@@ -35,7 +35,7 @@ ShipEnnemyModel::ShipEnnemyModel(int shipTextureID,glm::vec3 size) : Model()
 	firetime = 0;
 	spawntime = 0;
 	fireRate = 1;
-	spawnRate = 0;
+	spawnRate = 1.3;
 	
 }
 
@@ -62,7 +62,27 @@ void ShipEnnemyModel::Update(float dt)
 
 	//If ennemy position is at -10 for Z position, then bring it at the beginning
 	if(this->GetPosition().z < -2.0f){
-						//positionX will be generated randomly between -5 and 5
+		Reset();
+	}
+	firetime+= dt;
+	if(this->GetPosition().z < -3){
+		spawntime = World::GetInstance()->spawntime;
+		if ( spawntime > spawnRate)
+		{
+			World::GetInstance()->ResetSpawnTime();
+			Spawn();
+		}
+	}else if(firetime > fireRate){
+		firetime = 0.0;
+		Fire();
+	}
+
+	//	bullet.Update(dt);
+	Model::Update(dt);
+}
+
+void ShipEnnemyModel::Spawn(){
+							//positionX will be generated randomly between -5 and 5
 		
 		//TINO set X borders for ennemies
 		float lBound = -10.0f;
@@ -73,21 +93,10 @@ void ShipEnnemyModel::Update(float dt)
 		vec3 ennemyInitialPosition = vec3(ennemyPositionX, 0.0f, 48.0f);
 		this->SetPosition(ennemyInitialPosition);
 		//this->SetScaling(vec3(3.0f,3.0f,3.0f));
-	}
-	firetime+= dt;
-	if(firetime > fireRate){
-		firetime = 0.0;
-		Fire();
-	}
-
-	//	bullet.Update(dt);
-	Model::Update(dt);
 }
-
-//TINO set player ship position
-/*void setPlayerShipPosition(){
-
-}*/
+void ShipEnnemyModel::Reset(){
+	this->SetPosition(vec3(5.0, 5.0, -4.0));
+}
 
 void ShipEnnemyModel::Draw()
 {
