@@ -328,9 +328,6 @@ void World::LoadScene(const char * scene_path)
 			}else if(result == "eModel")
 			{
 				int shipTextureID = TextureLoader::LoadTexture("../Assets/Textures/ship2.jpg");
-				ShipModel* chair = new ShipModel(shipTextureID);
-				chair->Load(iss);
-				mModel.push_back(chair);
 
 				//TINO set X borders for ennemies
 				float lBound = -10.0f;
@@ -345,11 +342,15 @@ void World::LoadScene(const char * scene_path)
 				ShipEnnemyModel* ennemy[10];
 
 				//TINO set up the ennemis
-				for(int i=0; i<10;i++){
+
+				ennemy[0] = new ShipEnnemyModel(shipTextureID);
+				ennemy[0]->Load(iss);
+				vec3 EnnemySize = ennemy[0]->GetScaling();
+				for(int i=1; i<10;i++){
 					ennemy[i] = new ShipEnnemyModel(shipTextureID);
 					ennemy[i]->Load(iss);
 					vec3 EnnemyPosition = vec3(ennemyPositionX, 0.0f, ennemyPositionZ);//just modify x and z
-					vec3 EnnemySize = vec3(0.1f, 0.1f, 0.1f);
+					//vec3 EnnemySize = vec3(0.1f, 0.1f, 0.1f);
 					ennemy[i]->SetPosition(EnnemyPosition);
 					ennemy[i]->SetScaling(EnnemySize);
 					mModel.push_back(ennemy[i]);
