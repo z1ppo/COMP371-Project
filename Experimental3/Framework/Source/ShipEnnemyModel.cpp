@@ -32,7 +32,8 @@ ShipEnnemyModel::ShipEnnemyModel(int shipTextureID,glm::vec3 size) : Model()
 	// Create a vertex array
 	mTextureID = shipTextureID;
 	droidScene = World::GetInstance()->droidScene;
-
+	time = 0;
+	fireRate = 1;
 	
 }
 
@@ -41,7 +42,11 @@ ShipEnnemyModel::~ShipEnnemyModel()
 	// Free the GPU from the Vertex Buffer
 	droidScene->~sceneLoader();
 }
-
+void ShipEnnemyModel::Fire(){
+	unsigned int nextProjectile = World::GetInstance()->nextProjectile;
+	World::GetInstance()->LoadNextProjectile();
+	World::GetInstance()->mProjectile[nextProjectile]->Fire(mPosition);
+}
 void ShipEnnemyModel::Update(float dt)
 {
 	// If you are curious, un-comment this line to have spinning cubes!
@@ -67,8 +72,13 @@ void ShipEnnemyModel::Update(float dt)
 		this->SetPosition(ennemyInitialPosition);
 		//this->SetScaling(vec3(3.0f,3.0f,3.0f));
 	}
+	time+= dt;
+	if(time > fireRate){
+		time = 0.0;
+		Fire();
+	}
 
-	bullet.Update(dt);
+	//	bullet.Update(dt);
 	Model::Update(dt);
 }
 

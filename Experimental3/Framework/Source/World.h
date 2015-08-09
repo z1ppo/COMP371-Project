@@ -14,6 +14,7 @@
 #include "Billboard.h"
 #include <vector>
 #include "sceneLoader.h"
+#include "Projectile.h"
 
 class Camera;
 class Model;
@@ -28,13 +29,18 @@ public:
 	World();
 	~World();
 	
+
     static World* GetInstance();
+
+	unsigned int nextProjectile;
 	int droidTextureID;// = TextureLoader::LoadTexture("../Assets/Textures/droid.tga");
 	int MeteorTextureID;// = TextureLoader::LoadTexture("../Assets/Textures/meteor.jpg");
 	int shipTextureID;// = TextureLoader::LoadTexture("../Assets/Textures/ship1.jpg");
+	int projTextureID;
 
 	sceneLoader* meteorScene;
 	sceneLoader* droidScene;
+	sceneLoader* projScene;
 	void Update(float dt);
 	void Draw();
 
@@ -60,8 +66,9 @@ public:
 	float ks ;
 	float n ;
 	std::vector<Model*> mModel;
-	//std::vector<Projectile*> mProjectile;
+	std::vector<Projectile*> mProjectile;
 	Animation* GetmAnimation(int i);
+	void LoadNextProjectile();
     
 private:
     static World* instance;

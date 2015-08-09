@@ -10,7 +10,7 @@
 #pragma once
 
 #include "Model.h"
-#include "Projectile.h"
+//#include "Projectile.h"
 #include "mesh.h"
 #include "sceneLoader.h"
 class ShipEnnemyModel : public Model
@@ -18,10 +18,12 @@ class ShipEnnemyModel : public Model
 public:
 	ShipEnnemyModel(int texture,glm::vec3 size = glm::vec3(1.0f, 1.0f, 1.0f));
 	virtual ~ShipEnnemyModel();
-
-	Projectile bullet;
+	float time;
+	float fireRate;
+//	Projectile bullet;
 	virtual void Update(float dt);
 	virtual void Draw();
+	virtual void Fire();
 	int mTextureID;
 	sceneLoader* droidScene;
 

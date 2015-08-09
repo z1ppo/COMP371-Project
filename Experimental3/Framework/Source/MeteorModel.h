@@ -19,7 +19,6 @@ public:
 	MeteorModel(int texture,glm::vec3 size = glm::vec3(1.0f, 1.0f, 1.0f));
 	virtual ~MeteorModel();
 
-	Projectile bullet;
 	virtual void Update(float dt);
 	virtual void Draw();
 	int mTextureID;

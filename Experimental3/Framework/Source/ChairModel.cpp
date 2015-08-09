@@ -12,7 +12,7 @@
 #include "Renderer.h"
 //#include "texture.hpp"
 //#include "SOIL.h"
-#include "Projectile.h"
+
 #include "Camera.h"
 #include "World.h"
 
@@ -28,7 +28,7 @@ ChairModel::ChairModel(int shipTextureID) : Model()
 	//Vertex vertexBuffer[] = loadOBJ("../Assets/Model/Chair.obj" );
 	// Create a vertex array
 	mTextureID = shipTextureID;
-	bullet = new Projectile(vec3(5.0,5.0,0.0));
+	//bullet = new Projectile(vec3(5.0,5.0,0.0));
 	
 	std::vector< glm::vec3 > vertices;
 	std::vector< glm::vec2 > uvs;

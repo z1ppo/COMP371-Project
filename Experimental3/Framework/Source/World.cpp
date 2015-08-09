@@ -27,6 +27,7 @@
 #include "ShipModel.h"
 #include "ShipEnnemyModel.h"//TINO
 #include "MeteorModel.h"
+#include "Projectile.h"
 
 
 
@@ -105,19 +106,32 @@ World::World()
      AddParticleSystem(ps);
 
      */    // TMP
+
+	nextProjectile = 0;
+
 	shipTextureID = TextureLoader::LoadTexture("../Assets/Textures/ship1.jpg");
 
 	droidTextureID = TextureLoader::LoadTexture("../Assets/Textures/droid.tga");
 	MeteorTextureID = TextureLoader::LoadTexture("../Assets/Textures/meteor.jpg");
+	//projTextureID = TextureLoader::LoadTexture("../Assets/Textures/projectile.jpg");
 	 
 	droidScene = new sceneLoader("../Assets/Models/droid.obj");
 	meteorScene = new sceneLoader("../Assets/Models/meteor.obj");
+	projScene = new sceneLoader("../Assets/Models/projectile.obj");
 }
 
 World::~World()
 {
 	// Models
 	for (vector<Model*>::iterator it = mModel.begin(); it < mModel.end(); ++it)
+	{
+		delete *it;
+	}
+
+	mModel.clear();
+
+
+	for (vector<Projectile*>::iterator it = mProjectile.begin(); it < mProjectile.end(); ++it)
 	{
 		delete *it;
 	}
@@ -206,7 +220,10 @@ void World::Update(float dt)
 	{
 		(*it)->Update(dt);
 	}
-    
+    for (vector<Projectile*>::iterator it = mProjectile.begin(); it < mProjectile.end(); ++it)
+	{
+		(*it)->Update(dt);
+	}
     // Update billboards
     
     for (vector<ParticleSystem*>::iterator it = mParticleSystemList.begin(); it != mParticleSystemList.end(); ++it)
@@ -237,7 +254,10 @@ void World::Draw()
 	{
 		(*it)->Draw();
 	}
-
+	for (vector<Projectile*>::iterator it = mProjectile.begin(); it < mProjectile.end(); ++it)
+	{
+		(*it)->Draw();
+	}
 	// Draw Path Lines
 	
 	// Set Shader for path lines
@@ -414,10 +434,11 @@ void World::LoadScene(const char * scene_path)
 					//update X random position for next ennemy
 					MeteorPositionX = lBound + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(uBound-lBound)));
 				}
-
-
-			
-
+			}else if(result == "pModel")
+			{	
+				Projectile* proj = new Projectile(projTextureID);
+				proj->Load(iss);
+				mProjectile.push_back(proj);
 			}
 			else
 			{
@@ -489,4 +510,10 @@ void World::RemoveParticleSystem(ParticleSystem* particleSystem)
 Animation* World::GetmAnimation(int i)
 {
 	return World::mAnimation[i];
+}
+void World::LoadNextProjectile(){
+nextProjectile++;
+	if (nextProjectile >= 15){
+		nextProjectile-= 15;
+	}
 }

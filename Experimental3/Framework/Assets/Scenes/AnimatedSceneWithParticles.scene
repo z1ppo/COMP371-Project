@@ -71,13 +71,92 @@ scaling  = 0.1 0.1 0.1
 position = 0.0 0.0 0.0
 particleSystem = "Fire"
 
+
+
+[pModel]
+name     = "Projectile1"
+scaling  = 0.1 0.1 0.1
+position = 5.0 5.0 -4.0
+
+[pModel]
+name     = "Projectile2"
+scaling  = 0.1 0.1 0.1
+position = 5.0 5.0 -4.0
+
+[pModel]
+name     = "Projectile3"
+scaling  = 0.1 0.1 0.1
+position = 5.0 5.0 -4.0
+
+[pModel]
+name     = "Projectile4"
+scaling  = 0.1 0.1 0.1
+position = 5.0 5.0 -4.0
+
+[pModel]
+name     = "Projectile5"
+scaling  = 0.1 0.1 0.1
+position = 5.0 5.0 -4.0
+
+[pModel]
+name     = "Projectile6"
+scaling  = 0.1 0.1 0.1
+position = 5.0 5.0 -4.0
+
+[pModel]
+name     = "Projectile7"
+scaling  = 0.1 0.1 0.1
+position = 5.0 5.0 -4.0
+
+[pModel]
+name     = "Projectile8"
+scaling  = 0.1 0.1 0.1
+position = 5.0 5.0 -4.0
+
+[pModel]
+name     = "Projectile9"
+scaling  = 0.1 0.1 0.1
+position = 5.0 5.0 -4.0
+
+[pModel]
+name     = "Projectile10"
+scaling  = 0.1 0.1 0.1
+position = 5.0 5.0 -4.0
+
+[pModel]
+name     = "Projectile11"
+scaling  = 0.1 0.1 0.1
+position = 5.0 5.0 -4.0
+
+[pModel]
+name     = "Projectile12"
+scaling  = 0.1 0.1 0.1
+position = 5.0 5.0 -4.0
+
+[pModel]
+name     = "Projectile13"
+scaling  = 0.1 0.1 0.1
+position = 5.0 5.0 -4.0
+
+[pModel]
+name     = "Projectile14"
+scaling  = 0.1 0.1 0.1
+position = 5.0 5.0 -4.0
+
+[pModel]
+name     = "Projectile15"
+scaling  = 0.1 0.1 0.1
+position = 5.0 5.0 -4.0
+
+
+
 [eModel]
 name     = "EnemyShip"
 scaling  = 0.1 0.1 0.1
 position = 0.0 0.0 0.0
 
-
 [Meteor]
+
 name     = "Meteor"
 scaling  = 0.1 0.1 0.1
 position = 0.0 0.0 0.0

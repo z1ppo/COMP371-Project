@@ -10,7 +10,7 @@
 #pragma once
 
 #include "Model.h"
-#include "Projectile.h"
+//#include "Projectile.h"
 #include "mesh.h"
 #include "sceneLoader.h"
 class ShipModel : public Model
@@ -19,7 +19,7 @@ public:
 	ShipModel(int texture,glm::vec3 size = glm::vec3(1.0f, 1.0f, 1.0f));
 	virtual ~ShipModel();
 
-	Projectile bullet;
+	
 	virtual void Update(float dt);
 	virtual void Draw();
 	int mTextureID;

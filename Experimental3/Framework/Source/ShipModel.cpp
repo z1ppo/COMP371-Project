@@ -80,7 +80,7 @@ void ShipModel::Update(float dt)
 			mRotationAngleInDegrees += 23 * dt;
 		}
 	}
-	bullet.Update(dt);
+	//	bullet.Update(dt);
 	Model::Update(dt);
 }
 

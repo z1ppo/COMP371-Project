@@ -8,12 +8,12 @@
 //
 
 #include "MeteorModel.h"
-#include "ShipModel.h"
+
 #include "objloader.hpp"
 #include "Renderer.h"
 //#include "texture.hpp"
 //#include "SOIL.h"
-#include "Projectile.h"
+
 #include "Camera.h"
 #include "World.h"
 #include "Mesh.h"
