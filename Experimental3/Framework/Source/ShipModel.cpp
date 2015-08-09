@@ -36,6 +36,9 @@ ShipModel::ShipModel(int shipTextureID,glm::vec3 size) : Model()
 	mTextureID = shipTextureID;
 	scene = new sceneLoader("../Assets/Models/ship1.obj");
 	mRotationAxis = vec3(0,0,1);
+	float firetime = 0;
+	float fireRate = 2;
+	NextProjectle = 0;
 	
 }
 
@@ -51,6 +54,7 @@ void ShipModel::Update(float dt)
 	// That will only work if your world transform is correct...
 	// mRotationAngleInDegrees += 90 * dt; // spins by 90 degrees per second
 	//this->SetPosition(this->GetPosition()+(glm::vec3(0,0,0.5)*dt));
+	
 	if (glfwGetKey(EventManager::GetWindow(), GLFW_KEY_A ) == GLFW_PRESS && mPosition.x < 6)
 	{
 		//bankLeftTime += dt;
@@ -82,6 +86,15 @@ void ShipModel::Update(float dt)
 	}
 	//	bullet.Update(dt);
 	Model::Update(dt);
+
+	if(NextProjectle >= 15){
+	NextProjectle-=15;
+	}
+	if(firetime > firetime && glfwGetKey(EventManager::GetWindow(), GLFW_KEY_S ) == GLFW_PRESS){
+		firetime = 0;
+		World::GetInstance()->mPlayerProjectile[NextProjectle]->Fire(this->GetPosition());
+		NextProjectle++;
+	}
 }
 
 void ShipModel::Draw()

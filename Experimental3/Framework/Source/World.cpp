@@ -108,7 +108,6 @@ World::World()
      */    // TMP
 
 	nextProjectile = 0;
-	nextPlayerProjectile = 0;
 	spawntime = 0.0f;
 
 	shipTextureID = TextureLoader::LoadTexture("../Assets/Textures/ship1.jpg");
@@ -557,12 +556,6 @@ nextProjectile++;
 	}
 }
 
-void World::LoadNextPlayerProjectile(){
-nextPlayerProjectile++;
-	if (nextPlayerProjectile >= 15){
-		nextPlayerProjectile-= 15;
-	}
-}
 void World::ResetSpawnTime(){
 	spawntime = 0.0f;
 }

@@ -35,7 +35,6 @@ public:
     static World* GetInstance();
 
 	unsigned int nextProjectile;
-	unsigned int nextPlayerProjectile;
 	int droidTextureID;// = TextureLoader::LoadTexture("../Assets/Textures/droid.tga");
 	int MeteorTextureID;// = TextureLoader::LoadTexture("../Assets/Textures/meteor.jpg");
 	int shipTextureID;// = TextureLoader::LoadTexture("../Assets/Textures/ship1.jpg");
@@ -75,7 +74,6 @@ public:
 	std::vector<ShipEnnemyModel*> mShipEnnemyModel;
 	Animation* GetmAnimation(int i);
 	void LoadNextProjectile();
-	void LoadNextPlayerProjectile();
 	void ResetSpawnTime();
     
 private:
