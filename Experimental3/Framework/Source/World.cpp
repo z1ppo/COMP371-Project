@@ -108,6 +108,7 @@ World::World()
      */    // TMP
 
 	nextProjectile = 0;
+	nextPlayerProjectile = 0;
 	spawntime = 0.0f;
 
 	shipTextureID = TextureLoader::LoadTexture("../Assets/Textures/ship1.jpg");
@@ -235,6 +236,11 @@ void World::Update(float dt)
 		(*it)->Update(dt);
 	}
 
+	  for (vector<PlayerProjectile*>::iterator it = mPlayerProjectile.begin(); it < mPlayerProjectile.end(); ++it)
+	{
+		(*it)->Update(dt);
+	}
+
 	 for (vector<ShipEnnemyModel*>::iterator it = mShipEnnemyModel.begin(); it < mShipEnnemyModel.end(); ++it)
 	{
 		(*it)->Update(dt);
@@ -274,6 +280,11 @@ void World::Draw()
 		(*it)->Draw();
 	}
 	for (vector<Projectile*>::iterator it = mProjectile.begin(); it < mProjectile.end(); ++it)
+	{
+		(*it)->Draw();
+	}
+
+	for (vector<PlayerProjectile*>::iterator it = mPlayerProjectile.begin(); it < mPlayerProjectile.end(); ++it)
 	{
 		(*it)->Draw();
 	}
@@ -461,6 +472,13 @@ void World::LoadScene(const char * scene_path)
 				proj->Load(iss);
 				mProjectile.push_back(proj);
 			}
+
+			else if(result == "mpModel")
+			{	
+				PlayerProjectile* proj = new PlayerProjectile(projTextureID);
+				proj->Load(iss);
+				mPlayerProjectile.push_back(proj);
+			}
 			else
 			{
 				fprintf(stderr, "Error loading scene file... !");
@@ -536,6 +554,13 @@ void World::LoadNextProjectile(){
 nextProjectile++;
 	if (nextProjectile >= 15){
 		nextProjectile-= 15;
+	}
+}
+
+void World::LoadNextPlayerProjectile(){
+nextPlayerProjectile++;
+	if (nextPlayerProjectile >= 15){
+		nextPlayerProjectile-= 15;
 	}
 }
 void World::ResetSpawnTime(){

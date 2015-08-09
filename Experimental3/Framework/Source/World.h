@@ -15,6 +15,7 @@
 #include <vector>
 #include "sceneLoader.h"
 #include "Projectile.h"
+#include "PlayerProjectile.h"
 #include "ShipEnnemyModel.h"
 
 class Camera;
@@ -34,6 +35,7 @@ public:
     static World* GetInstance();
 
 	unsigned int nextProjectile;
+	unsigned int nextPlayerProjectile;
 	int droidTextureID;// = TextureLoader::LoadTexture("../Assets/Textures/droid.tga");
 	int MeteorTextureID;// = TextureLoader::LoadTexture("../Assets/Textures/meteor.jpg");
 	int shipTextureID;// = TextureLoader::LoadTexture("../Assets/Textures/ship1.jpg");
@@ -69,9 +71,11 @@ public:
 	float spawntime;
 	std::vector<Model*> mModel;
 	std::vector<Projectile*> mProjectile;
+	std::vector<PlayerProjectile*> mPlayerProjectile;
 	std::vector<ShipEnnemyModel*> mShipEnnemyModel;
 	Animation* GetmAnimation(int i);
 	void LoadNextProjectile();
+	void LoadNextPlayerProjectile();
 	void ResetSpawnTime();
     
 private:
