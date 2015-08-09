@@ -32,8 +32,10 @@ ShipEnnemyModel::ShipEnnemyModel(int shipTextureID,glm::vec3 size) : Model()
 	// Create a vertex array
 	mTextureID = shipTextureID;
 	droidScene = World::GetInstance()->droidScene;
-	time = 0;
+	firetime = 0;
+	spawntime = 0;
 	fireRate = 1;
+	spawnRate = 0;
 	
 }
 
@@ -59,7 +61,7 @@ void ShipEnnemyModel::Update(float dt)
 	this->SetPosition(this->GetPosition()-(glm::vec3(0,0,5)*dt));
 
 	//If ennemy position is at -10 for Z position, then bring it at the beginning
-	if(this->GetPosition().z < -8.0f){
+	if(this->GetPosition().z < -2.0f){
 						//positionX will be generated randomly between -5 and 5
 		
 		//TINO set X borders for ennemies
@@ -68,13 +70,13 @@ void ShipEnnemyModel::Update(float dt)
 
 		//TINO position		
 		float ennemyPositionX = lBound + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(uBound-lBound)));
-		vec3 ennemyInitialPosition = vec3(ennemyPositionX, 0.0f, 43.0f);
+		vec3 ennemyInitialPosition = vec3(ennemyPositionX, 0.0f, 48.0f);
 		this->SetPosition(ennemyInitialPosition);
 		//this->SetScaling(vec3(3.0f,3.0f,3.0f));
 	}
-	time+= dt;
-	if(time > fireRate){
-		time = 0.0;
+	firetime+= dt;
+	if(firetime > fireRate){
+		firetime = 0.0;
 		Fire();
 	}
 

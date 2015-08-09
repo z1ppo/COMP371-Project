@@ -52,10 +52,10 @@ void Projectile::Update(float dt)
 
 	
 
-	this->SetPosition(this->GetPosition()+(aim*5.0f*dt));
+	this->SetPosition(this->GetPosition()+(aim*10.0f*dt));
 
 	
-	if(this->GetPosition().z < -8.0f){
+	if(this->GetPosition().z < -2.0f){
 		this->Reset();
 	}
 

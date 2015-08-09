@@ -15,6 +15,7 @@
 #include <vector>
 #include "sceneLoader.h"
 #include "Projectile.h"
+#include "ShipEnnemyModel.h"
 
 class Camera;
 class Model;
@@ -67,6 +68,7 @@ public:
 	float n ;
 	std::vector<Model*> mModel;
 	std::vector<Projectile*> mProjectile;
+	std::vector<ShipEnnemyModel*> mShipEnnemyModel;
 	Animation* GetmAnimation(int i);
 	void LoadNextProjectile();
     

@@ -18,8 +18,10 @@ class ShipEnnemyModel : public Model
 public:
 	ShipEnnemyModel(int texture,glm::vec3 size = glm::vec3(1.0f, 1.0f, 1.0f));
 	virtual ~ShipEnnemyModel();
-	float time;
+	float firetime;
 	float fireRate;
+	float spawntime;
+	float spawnRate;
 //	Projectile bullet;
 	virtual void Update(float dt);
 	virtual void Draw();
