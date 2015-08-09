@@ -64,15 +64,18 @@ key      = "KeyCycle6"  time = 5.0f
 key      = "KeyCycle7"  time = 6.0f
 key      = "KeyCycle8"  time = 7.0f
 key      = "KeyCycle1"  time = 8.0f
+
 [cModel]
 name     = "Ship"
 scaling  = 0.1 0.1 0.1
 position = 0.0 0.0 0.0
+particleSystem = "Fire"
 
 [eModel]
 name     = "EnemyShip"
 scaling  = 0.1 0.1 0.1
 position = 0.0 0.0 0.0
+
 
 [Meteor]
 name     = "Meteor"

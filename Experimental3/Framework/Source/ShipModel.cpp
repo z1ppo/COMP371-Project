@@ -18,6 +18,10 @@
 #include "Mesh.h"
 #include "Model.h"
 #include"sceneLoader.h"
+#include "EventManager.h"
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/quaternion.hpp>
+#include <GLFW/glfw3.h>
 
 
 // Include GLEW - OpenGL Extension Wrangler
@@ -31,7 +35,7 @@ ShipModel::ShipModel(int shipTextureID,glm::vec3 size) : Model()
 	// Create a vertex array
 	mTextureID = shipTextureID;
 	scene = new sceneLoader("../Assets/Models/ship1.obj");
-
+	mRotationAxis = vec3(0,0,1);
 	
 }
 
@@ -46,7 +50,36 @@ void ShipModel::Update(float dt)
 	// If you are curious, un-comment this line to have spinning cubes!
 	// That will only work if your world transform is correct...
 	// mRotationAngleInDegrees += 90 * dt; // spins by 90 degrees per second
-	this->SetPosition(this->GetPosition()+(glm::vec3(0,0,0.5)*dt));
+	//this->SetPosition(this->GetPosition()+(glm::vec3(0,0,0.5)*dt));
+	if (glfwGetKey(EventManager::GetWindow(), GLFW_KEY_A ) == GLFW_PRESS && mPosition.x < 6)
+	{
+		//bankLeftTime += dt;
+		mPosition+=(glm::vec3(10.0f,0,0)*dt);
+		if(mRotationAngleInDegrees > -45){
+			mRotationAngleInDegrees -= 60 * dt;
+		}
+
+	} else if (glfwGetKey(EventManager::GetWindow(), GLFW_KEY_D ) == GLFW_PRESS && mPosition.x > -6)
+	{
+		//bankRightTime += dt;
+		mPosition+=(glm::vec3(-10.0f,0,0)*dt);
+		if(mRotationAngleInDegrees < 45){
+			mRotationAngleInDegrees += 60 * dt;
+		}
+	} else {
+
+		
+		if(mRotationAngleInDegrees > 0.001){
+			mRotationAngleInDegrees -= 23 * dt;
+		} else if (mRotationAngleInDegrees < 0.001){
+			mRotationAngleInDegrees += 23 * dt;
+		}
+		if(mRotationAngleInDegrees > 0){
+			mRotationAngleInDegrees -= 23 * dt;
+		} else if (mRotationAngleInDegrees < 0){
+			mRotationAngleInDegrees += 23 * dt;
+		}
+	}
 	bullet.Update(dt);
 	Model::Update(dt);
 }

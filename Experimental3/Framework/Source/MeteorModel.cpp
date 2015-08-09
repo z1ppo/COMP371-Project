@@ -31,7 +31,7 @@ MeteorModel::MeteorModel(int shipTextureID,glm::vec3 size) : Model()
 	//Vertex vertexBuffer[] = loadOBJ("../Assets/Model/Chair.obj" );
 	// Create a vertex array
 	mTextureID = shipTextureID;
-	meteorScene = new sceneLoader("../Assets/Models/meteor.obj");
+	meteorScene = World::GetInstance()->meteorScene;
 
 	
 }

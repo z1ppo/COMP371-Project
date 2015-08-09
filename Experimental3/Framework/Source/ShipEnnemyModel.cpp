@@ -31,7 +31,7 @@ ShipEnnemyModel::ShipEnnemyModel(int shipTextureID,glm::vec3 size) : Model()
 	//Vertex vertexBuffer[] = loadOBJ("../Assets/Model/Chair.obj" );
 	// Create a vertex array
 	mTextureID = shipTextureID;
-	scenes = new sceneLoader("../Assets/Models/droid.obj");
+	droidScene = World::GetInstance()->droidScene;
 
 	
 }
@@ -39,7 +39,7 @@ ShipEnnemyModel::ShipEnnemyModel(int shipTextureID,glm::vec3 size) : Model()
 ShipEnnemyModel::~ShipEnnemyModel()
 {
 	// Free the GPU from the Vertex Buffer
-	scenes->~sceneLoader();
+	droidScene->~sceneLoader();
 }
 
 void ShipEnnemyModel::Update(float dt)
@@ -179,7 +179,7 @@ void ShipEnnemyModel::Draw()
 		glUniform3f(LightAttenuationID, lightKc, lightKl, lightKq);
 		Renderer::CheckForErrors();
 
-   scenes->draw(programID);
+   droidScene->draw(programID);
 	
 	
 

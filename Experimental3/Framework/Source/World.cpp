@@ -105,6 +105,13 @@ World::World()
      AddParticleSystem(ps);
 
      */    // TMP
+	shipTextureID = TextureLoader::LoadTexture("../Assets/Textures/ship1.jpg");
+
+	droidTextureID = TextureLoader::LoadTexture("../Assets/Textures/droid.tga");
+	MeteorTextureID = TextureLoader::LoadTexture("../Assets/Textures/meteor.jpg");
+	 
+	droidScene = new sceneLoader("../Assets/Models/droid.obj");
+	meteorScene = new sceneLoader("../Assets/Models/meteor.obj");
 }
 
 World::~World()
@@ -322,13 +329,13 @@ void World::LoadScene(const char * scene_path)
 				// this is a comment line
 			}else if(result == "cModel")
 			{
-				int shipTextureID = TextureLoader::LoadTexture("../Assets/Textures/ship1.jpg");
+				
 				ShipModel* chair = new ShipModel(shipTextureID);
 				chair->Load(iss);
 				mModel.push_back(chair);
 			}else if(result == "eModel")
 			{
-				int shipTextureID = TextureLoader::LoadTexture("../Assets/Textures/droid.tga");
+				
 
 				//TINO set X borders for ennemies
 				float lBound = -10.0f;
@@ -344,11 +351,11 @@ void World::LoadScene(const char * scene_path)
 
 				//TINO set up the ennemis
 
-				ennemy[0] = new ShipEnnemyModel(shipTextureID);
+				ennemy[0] = new ShipEnnemyModel(droidTextureID);
 				ennemy[0]->Load(iss);
 				vec3 EnnemySize = ennemy[0]->GetScaling();
 				for(int i=1; i<10;i++){
-					ennemy[i] = new ShipEnnemyModel(shipTextureID);
+					ennemy[i] = new ShipEnnemyModel(droidTextureID);
 					ennemy[i]->Load(iss);
 					vec3 EnnemyPosition = vec3(ennemyPositionX, 0.0f, ennemyPositionZ);//just modify x and z
 					//vec3 EnnemySize = vec3(0.1f, 0.1f, 0.1f);
@@ -374,7 +381,7 @@ void World::LoadScene(const char * scene_path)
 
 			}else if(result == "Meteor")
 			{
-				int MeteorTextureID = TextureLoader::LoadTexture("../Assets/Textures/meteor.jpg");
+				
 
 				//TINO set X borders for ennemies
 				float lBound = -10.0f;

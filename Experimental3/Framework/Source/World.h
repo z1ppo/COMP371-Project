@@ -13,6 +13,7 @@
 #include "ParsingHelper.h"
 #include "Billboard.h"
 #include <vector>
+#include "sceneLoader.h"
 
 class Camera;
 class Model;
@@ -28,7 +29,12 @@ public:
 	~World();
 	
     static World* GetInstance();
+	int droidTextureID;// = TextureLoader::LoadTexture("../Assets/Textures/droid.tga");
+	int MeteorTextureID;// = TextureLoader::LoadTexture("../Assets/Textures/meteor.jpg");
+	int shipTextureID;// = TextureLoader::LoadTexture("../Assets/Textures/ship1.jpg");
 
+	sceneLoader* meteorScene;
+	sceneLoader* droidScene;
 	void Update(float dt);
 	void Draw();
 
@@ -54,6 +60,7 @@ public:
 	float ks ;
 	float n ;
 	std::vector<Model*> mModel;
+	//std::vector<Projectile*> mProjectile;
 	Animation* GetmAnimation(int i);
     
 private:

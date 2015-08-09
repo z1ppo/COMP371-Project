@@ -41,10 +41,10 @@ void ParticleDescriptor::SetFountainDescriptor()
 
 void ParticleDescriptor::SetFireDescriptor()
 {
-    velocity = vec3(0.0f, 0.1f, 0.0f);
+    velocity = vec3(0.0f, 0.0f, 1.0f);
     velocityDeltaAngle = 4.0f;
     
-    acceleration = vec3(0.0f, 0.0f, 0.0f);
+    acceleration = vec3(0.0f, 0.0f, -20.0f);
     
     initialSize = vec2(0.25f, 0.25f);
     initialSizeDelta = vec2(0.02f, 0.02f);
@@ -56,8 +56,8 @@ void ParticleDescriptor::SetFireDescriptor()
     endColor = vec4(0.0f, 0.0f, 0.8f, 0.0f);
 
     emissionRate = 25.0f;
-    fadeInTime = 0.5f;
-    fadeOutTime = 1.5f;
-    totalLifetime = 2.5f;
+    fadeInTime = 0.1f;
+    fadeOutTime = 0.4f;
+    totalLifetime = 0.8f;
     totalLifetimeDelta = 0.0f;
 }
