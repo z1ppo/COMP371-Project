@@ -31,7 +31,7 @@ ShipEnnemyModel::ShipEnnemyModel(int shipTextureID,glm::vec3 size) : Model()
 	//Vertex vertexBuffer[] = loadOBJ("../Assets/Model/Chair.obj" );
 	// Create a vertex array
 	mTextureID = shipTextureID;
-	scenes = new sceneLoader("../Assets/Models/Ship1.obj");
+	scenes = new sceneLoader("../Assets/Models/droid.obj");
 
 	
 }

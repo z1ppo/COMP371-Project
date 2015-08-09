@@ -30,7 +30,7 @@ ShipModel::ShipModel(int shipTextureID,glm::vec3 size) : Model()
 	//Vertex vertexBuffer[] = loadOBJ("../Assets/Model/Chair.obj" );
 	// Create a vertex array
 	mTextureID = shipTextureID;
-	scene = new sceneLoader("../Assets/Models/Ship1.obj");
+	scene = new sceneLoader("../Assets/Models/ship1.obj");
 
 	
 }

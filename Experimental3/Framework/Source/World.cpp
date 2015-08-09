@@ -327,7 +327,7 @@ void World::LoadScene(const char * scene_path)
 				mModel.push_back(chair);
 			}else if(result == "eModel")
 			{
-				int shipTextureID = TextureLoader::LoadTexture("../Assets/Textures/ship2.jpg");
+				int shipTextureID = TextureLoader::LoadTexture("../Assets/Textures/droid.tga");
 
 				//TINO set X borders for ennemies
 				float lBound = -10.0f;
