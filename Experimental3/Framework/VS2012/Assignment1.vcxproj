@@ -102,6 +102,7 @@
     <ClCompile Include="..\Source\ChairModel.cpp" />
     <ClCompile Include="..\Source\FirstPersonCamera.cpp" />
     <ClCompile Include="..\Source\mesh.cpp" />
+    <ClCompile Include="..\Source\MeteorModel.cpp" />
     <ClCompile Include="..\Source\objloader.cpp" />
     <ClCompile Include="..\Source\ParticleDescriptor.cpp" />
     <ClCompile Include="..\Source\ParticleEmitter.cpp" />
@@ -129,6 +130,7 @@
     <ClInclude Include="..\Source\FirstPersonCamera.h" />
     <ClInclude Include="..\Source\mesh.h" />
     <ClInclude Include="..\Source\meshData.h" />
+    <ClInclude Include="..\Source\MeteorModel.h" />
     <ClInclude Include="..\Source\objloader.hpp" />
     <ClInclude Include="..\Source\ParsingHelper.h" />
     <ClInclude Include="..\Source\ParticleDescriptor.h" />

@@ -24,7 +24,7 @@
 // Include GLEW - OpenGL Extension Wrangler
 #include <GL/glew.h>
 using namespace glm;
-sceneLoader* scenes;
+
 ShipEnnemyModel::ShipEnnemyModel(int shipTextureID,glm::vec3 size) : Model()
 {
 	// Create Vertex Buffer for all the verices of the Cube

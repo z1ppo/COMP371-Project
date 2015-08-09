@@ -7,7 +7,7 @@
 // Copyright (c) 2014-2015 Concordia University. All rights reserved.
 //
 
-#include "ShipEnnemyModel.h"
+#include "MeteorModel.h"
 #include "ShipModel.h"
 #include "objloader.hpp"
 #include "Renderer.h"
@@ -24,25 +24,25 @@
 // Include GLEW - OpenGL Extension Wrangler
 #include <GL/glew.h>
 using namespace glm;
-sceneLoader* scenes;
-ShipEnnemyModel::ShipEnnemyModel(int shipTextureID,glm::vec3 size) : Model()
+
+MeteorModel::MeteorModel(int shipTextureID,glm::vec3 size) : Model()
 {
 	// Create Vertex Buffer for all the verices of the Cube
 	//Vertex vertexBuffer[] = loadOBJ("../Assets/Model/Chair.obj" );
 	// Create a vertex array
 	mTextureID = shipTextureID;
-	scenes = new sceneLoader("../Assets/Models/droid.obj");
+	meteorScene = new sceneLoader("../Assets/Models/meteor.obj");
 
 	
 }
 
-ShipEnnemyModel::~ShipEnnemyModel()
+MeteorModel::~MeteorModel()
 {
 	// Free the GPU from the Vertex Buffer
-	scenes->~sceneLoader();
+	meteorScene->~sceneLoader();
 }
 
-void ShipEnnemyModel::Update(float dt)
+void MeteorModel::Update(float dt)
 {
 	// If you are curious, un-comment this line to have spinning cubes!
 	// That will only work if your world transform is correct...
@@ -68,7 +68,7 @@ void ShipEnnemyModel::Update(float dt)
 		//this->SetScaling(vec3(3.0f,3.0f,3.0f));
 	}
 
-	bullet.Update(dt);
+	//bullet.Update(dt);
 	Model::Update(dt);
 }
 
@@ -77,7 +77,7 @@ void ShipEnnemyModel::Update(float dt)
 
 }*/
 
-void ShipEnnemyModel::Draw()
+void MeteorModel::Draw()
 {
 	// Draw the Vertex Buffer
 	// Note this draws a unit Cube
@@ -179,7 +179,7 @@ void ShipEnnemyModel::Draw()
 		glUniform3f(LightAttenuationID, lightKc, lightKl, lightKq);
 		Renderer::CheckForErrors();
 
-   scenes->draw(programID);
+   meteorScene->draw(programID);
 	
 	
 
@@ -201,7 +201,7 @@ void ShipEnnemyModel::Draw()
     Renderer::SetShader(oldShader);
 }
 
-bool ShipEnnemyModel::ParseLine(const std::vector<ci_string> &token)
+bool MeteorModel::ParseLine(const std::vector<ci_string> &token)
 {
 	if (token.empty())
 	{

@@ -13,17 +13,17 @@
 #include "Projectile.h"
 #include "mesh.h"
 #include "sceneLoader.h"
-class ShipEnnemyModel : public Model
+class MeteorModel : public Model
 {
 public:
-	ShipEnnemyModel(int texture,glm::vec3 size = glm::vec3(1.0f, 1.0f, 1.0f));
-	virtual ~ShipEnnemyModel();
+	MeteorModel(int texture,glm::vec3 size = glm::vec3(1.0f, 1.0f, 1.0f));
+	virtual ~MeteorModel();
 
 	Projectile bullet;
 	virtual void Update(float dt);
 	virtual void Draw();
 	int mTextureID;
-	sceneLoader* scene;
+	sceneLoader* meteorScene;
 
 protected:
 	virtual bool ParseLine(const std::vector<ci_string> &token);

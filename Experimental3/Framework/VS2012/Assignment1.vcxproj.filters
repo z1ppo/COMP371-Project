@@ -98,6 +98,9 @@
     <ClCompile Include="..\Source\ShipEnnemyModel.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\MeteorModel.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\EventManager.h">
@@ -173,6 +176,9 @@
       <Filter>Source Files\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\ShipEnnemyModel.h">
+      <Filter>Source Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\MeteorModel.h">
       <Filter>Source Files\Model</Filter>
     </ClInclude>
   </ItemGroup>

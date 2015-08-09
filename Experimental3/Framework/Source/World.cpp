@@ -26,6 +26,7 @@
 #include "ChairModel.h"
 #include "ShipModel.h"
 #include "ShipEnnemyModel.h"//TINO
+#include "MeteorModel.h"
 
 
 
@@ -370,6 +371,45 @@ void World::LoadScene(const char * scene_path)
 				chair2->SetPosition(EnnemyPosition);
 				chair2->SetScaling(EnnemySize);
 				mModel.push_back(chair2);*/
+
+			}else if(result == "Meteor")
+			{
+				int MeteorTextureID = TextureLoader::LoadTexture("../Assets/Textures/meteor.jpg");
+
+				//TINO set X borders for ennemies
+				float lBound = -10.0f;
+				float uBound = 10.0f;
+
+				//TINO position
+				//positionX will be generated randomly between -5 and 5
+				float MeteorPositionX = lBound + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(uBound-lBound)));
+				float MeteorPositionZ = 10.0f;
+
+				//TINO 10 ennemies
+				MeteorModel* Meteor[3];
+
+				//TINO set up the ennemis
+
+				Meteor[0] = new MeteorModel(MeteorTextureID);
+				Meteor[0]->Load(iss);
+				vec3 MeteorSize = Meteor[0]->GetScaling();
+				for(int i=1; i<3;i++){
+					Meteor[i] = new MeteorModel(MeteorTextureID);
+					Meteor[i]->Load(iss);
+					vec3 MeteorPosition = vec3(MeteorPositionX, 0.0f, MeteorPositionZ);//just modify x and z
+					//vec3 EnnemySize = vec3(0.1f, 0.1f, 0.1f);
+					Meteor[i]->SetPosition(MeteorPosition);
+					Meteor[i]->SetScaling(MeteorSize);
+					mModel.push_back(Meteor[i]);
+
+					MeteorPositionZ += 5.0f;//next ennemy will be 10 step further in Z
+
+					//update X random position for next ennemy
+					MeteorPositionX = lBound + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(uBound-lBound)));
+				}
+
+
+			
 
 			}
 			else
