@@ -52,11 +52,16 @@ void PlayerProjectile::Update(float dt)
 
 	
 
-	this->SetPosition(this->GetPosition()+(aim*5.0f*dt));
+	this->SetPosition(this->GetPosition()+(aim*15.0f*dt));
 
 	
 	if(this->GetPosition().z > 55.0f){
 		this->Reset();
+	}
+
+	for (vector<ShipEnnemyModel*>::iterator it = World::GetInstance()->mShipEnnemyModel.begin(); it < World::GetInstance()->mShipEnnemyModel.end(); ++it)
+	{
+		delete *it;
 	}
 
 	//if (glm::distance(mPosition, World::GetInstance()->mModel[0]->GetPosition()) < 0.872){

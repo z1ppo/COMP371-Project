@@ -36,8 +36,8 @@ ShipModel::ShipModel(int shipTextureID,glm::vec3 size) : Model()
 	mTextureID = shipTextureID;
 	scene = new sceneLoader("../Assets/Models/ship1.obj");
 	mRotationAxis = vec3(0,0,1);
-	float firetime = 0;
-	float fireRate = 2;
+	firetime = 0.0;
+	fireRate = 0.5;
 	NextProjectle = 0;
 	
 }
@@ -90,9 +90,10 @@ void ShipModel::Update(float dt)
 	if(NextProjectle >= 15){
 	NextProjectle-=15;
 	}
-	if(firetime > firetime && glfwGetKey(EventManager::GetWindow(), GLFW_KEY_S ) == GLFW_PRESS){
+	firetime += dt;
+	if(firetime > fireRate){
 		firetime = 0;
-		World::GetInstance()->mPlayerProjectile[NextProjectle]->Fire(this->GetPosition());
+		World::GetInstance()->mPlayerProjectile[NextProjectle]->Fire(mPosition);
 		NextProjectle++;
 	}
 }
