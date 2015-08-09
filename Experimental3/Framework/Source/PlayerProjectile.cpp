@@ -8,8 +8,8 @@
 //
 
 
-#include "ShipModel.h"
-#include "objloader.hpp"
+
+
 #include "Renderer.h"
 //#include "texture.hpp"
 //#include "SOIL.h"
@@ -61,13 +61,15 @@ void PlayerProjectile::Update(float dt)
 
 	for (vector<ShipEnnemyModel*>::iterator it = World::GetInstance()->mShipEnnemyModel.begin(); it < World::GetInstance()->mShipEnnemyModel.end(); ++it)
 	{
-		delete *it;
+		
+	if (glm::distance(mPosition, (*it)->GetPosition()) < 0.732){
+	this->Reset();
+	(*it)->Reset();
+	printf("EXPLOSION!");
+	}
 	}
 
-	//if (glm::distance(mPosition, World::GetInstance()->mModel[0]->GetPosition()) < 0.872){
-	//this->Reset();
-	//printf("COLLISON!!!!!!!!!!!");
-	//}
+	
 
 	
 	Model::Update(dt);

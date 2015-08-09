@@ -85,8 +85,8 @@ void ShipEnnemyModel::Spawn(){
 							//positionX will be generated randomly between -5 and 5
 		
 		//TINO set X borders for ennemies
-		float lBound = -10.0f;
-		float uBound = 10.0f;
+		float lBound = -6.0f;
+		float uBound = 6.0f;
 
 		//TINO position		
 		float ennemyPositionX = lBound + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(uBound-lBound)));
