@@ -31,6 +31,11 @@ public:
 	int mTextureID;
 	sceneLoader* droidScene;
 
+	virtual void Collision();
+	float ExplosionCoef;
+	float ExplosionTime;
+	float ExplosionCap;
+
 protected:
 	virtual bool ParseLine(const std::vector<ci_string> &token);
 

@@ -36,6 +36,10 @@ ShipEnnemyModel::ShipEnnemyModel(int shipTextureID,glm::vec3 size) : Model()
 	spawntime = 0;
 	fireRate = 1;
 	spawnRate = 1.3;
+
+	ExplosionCoef =-1;
+	ExplosionTime = 0;
+	ExplosionCap =0.5;
 	
 }
 
@@ -80,9 +84,20 @@ void ShipEnnemyModel::Update(float dt)
 		firetime = 0.0;
 		Fire();
 	}
-
+	if(!(ExplosionCoef < 0)){
+		ExplosionCoef+=dt;
+		ExplosionTime+=dt;
+		if(ExplosionTime>ExplosionCap){
+		ExplosionTime = 0.0f;
+		ExplosionCoef = -1.0f;
+		Reset();
+		}
+	}
 	//	bullet.Update(dt);
 	Model::Update(dt);
+}
+void ShipEnnemyModel::Collision(){
+	ExplosionCoef = 0.0f;
 }
 
 void ShipEnnemyModel::Spawn(){
@@ -204,7 +219,11 @@ void ShipEnnemyModel::Draw()
 		glUniform3f(LightAttenuationID, lightKc, lightKl, lightKq);
 		Renderer::CheckForErrors();
 
-   droidScene->draw(programID);
+   		GLuint ExplosionCoefID = glGetUniformLocation(programID, "ExplosionCoef");
+		glUniform1f(ExplosionCoefID, ExplosionCoef);
+
+	droidScene->draw(programID);
+	glUniform1f(ExplosionCoefID, -1.0f);
 	
 	
 

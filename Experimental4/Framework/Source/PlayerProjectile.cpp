@@ -64,7 +64,7 @@ void PlayerProjectile::Update(float dt)
 		
 	if (glm::distance(mPosition, (*it)->GetPosition()) < 0.732){
 	this->Reset();
-	(*it)->Reset();
+	(*it)->Collision();
 	printf("EXPLOSION!");
 	}
 	}

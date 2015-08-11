@@ -24,10 +24,11 @@ public:
 	unsigned int NextProjectle;
 	virtual void Update(float dt);
 	virtual void Draw();
-	virtual void Collision();
+	
 	int mTextureID;
 	sceneLoader* scene;
 
+	virtual void Collision();
 	float ExplosionCoef;
 	float ExplosionTime;
 	float ExplosionCap;
