@@ -19,7 +19,6 @@ unsigned int HealthUniformID;
 unsigned int oldShaderID;
 unsigned int remainingHP;
 
-
 void HealthBar::initializeHP(const char * texturePath)
 {
 	remainingHP = 3;
@@ -29,25 +28,31 @@ void HealthBar::initializeHP(const char * texturePath)
 	// Initialize VBO
 	glGenBuffers(1, &HealthVertexBufferID);
 	glGenBuffers(1, &HealthUVBufferID);
+	
+	// Store old shader
+	oldShaderID = Renderer::GetCurrentShader();
 
-	//Text2DShaderID = Renderer::LoadShaders("Text2DVertexShader.vertexshader", "Text2DVertexShader.fragmentshader");
-
-	// Initialize shader
-	setCurrentShader();
+	// Initialize 2D Shader
+	Renderer::SetShader(SHADER_2D);
+	HealthShaderID = Renderer::GetShaderProgramID();
 
 	// Initialize uniforms' IDs
 	HealthUniformID = glGetUniformLocation(HealthShaderID, "myTextureSampler");
 
-	// Restore original shader
-	restoreOldShader();
+	// Restore old shader
+	Renderer::SetShader((ShaderType)oldShaderID);
 }
 
 void HealthBar::displayHP(int x, int y, int size){
-
-
+	
 	//return;
-	// Initialize shader
-	setCurrentShader();
+
+	// Store old shader
+	oldShaderID = Renderer::GetCurrentShader();
+
+	// Initialize 2D Shader
+	Renderer::SetShader(SHADER_2D);
+	HealthShaderID = Renderer::GetShaderProgramID();
 
 	// Bind texture
 	// Initialize uniforms' IDs
@@ -139,7 +144,8 @@ void HealthBar::displayHP(int x, int y, int size){
 	glDisableVertexAttribArray(1);
 	glDisableVertexAttribArray(0);
 
-	restoreOldShader();
+	// Restore old shader
+	Renderer::SetShader((ShaderType)oldShaderID);
 }
 
 void HealthBar::cleanUpHP(){
@@ -153,23 +159,6 @@ void HealthBar::cleanUpHP(){
 
 	// Delete shader
 	glDeleteProgram(HealthShaderID);
-}
-
-
-void HealthBar::setCurrentShader()
-{
-	// Store old shader
-	oldShaderID = Renderer::GetCurrentShader();
-
-	// Initialize 2D Shader
-	Renderer::SetShader(SHADER_2D);
-	HealthShaderID = Renderer::GetShaderProgramID();
-}
-
-void HealthBar::restoreOldShader()
-{
-	// Restore old shader
-	Renderer::SetShader((ShaderType)oldShaderID);
 }
 
 void HealthBar::removeHP(int amountToRemove)
@@ -192,6 +181,6 @@ void HealthBar::addHP(int amountToAdd)
 	}
 }
 
-unsigned int HealthBar::GetRemainingHP(){
-return remainingHP;
+unsigned int HealthBar::GetHP(){
+	return remainingHP;
 }

@@ -47,6 +47,7 @@
 
 #include "Text2D.h"
 #include "HealthBar.h"
+#include "Icons2D.h"
 
 
 using namespace std;
@@ -71,6 +72,9 @@ World::World(int level)
 
 	// Initialize health bar class with appropriate texture
 	HealthBar::initializeHP("../Assets/Textures/Box_Green.png");
+	//HealthBar::initializeHP("../Assets/Textures/screen.png");
+
+	Icons2D::initializeIcon("../Assets/Textures/screen.png", "../Assets/Textures/hp.png", "../Assets/Textures/time.png", "../Assets/Textures/score.png");
 
 	// 2DText Alex
 
@@ -149,7 +153,7 @@ World::World(int level)
 	projTextureID = TextureLoader::LoadTexture("../Assets/Textures/projectile.jpg");
 	moonTextureID = TextureLoader::LoadTexture("../Assets/Textures/moonHD.jpg");
 	earthTextureID = TextureLoader::LoadTexture("../Assets/Textures/earthHD.jpg");
-	spaceTextureID = TextureLoader::LoadTexture("../Assets/Textures/spaceNASA2.jpg");
+	spaceTextureID = TextureLoader::LoadTexture("../Assets/Textures/spacetest.jpg");
 	sunTextureID = TextureLoader::LoadTexture("../Assets/Textures/sun.jpg");
 	marsTextureID = TextureLoader::LoadTexture("../Assets/Textures/mars.jpg");
 	heartTextureID = TextureLoader::LoadTexture("../Assets/Textures/heart.tga");
@@ -371,20 +375,28 @@ void World::Draw()
 	
 	// 2D Text Alex
 
+	// Display screen texture
+	//Icons2D::displayIcon(0, 10, 25, 250); // displays time icon next to time
+
 	// Print the text in timerText to the screen
-	Text2D::print2DText(timerText, 650, 50, 17);
+	Text2D::print2DText(timerText, 50, 50, 17);
+	Icons2D::displayIcon(2, 20, 50, 20); // displays time icon next to time
 
 	// Display score counter
 	// When an enemy is destroyed by one of our particles, call function to increase player score by 1
 	// function to call: IncrementPlayerScore()
 	sprintf(scoreText, "score:%.f", playerScore);
-	Text2D::print2DText(scoreText, 650, 25, 20);
+	Text2D::print2DText(scoreText, 50, 25, 20);
+	Icons2D::displayIcon(3, 20, 25, 20); // displays score icon next to score
 
 	sprintf(healthText, "HP:", playerScore);
-	Text2D::print2DText(healthText, 650, 75, 20);
-	if(HealthBar::GetRemainingHP()>0){
-		HealthBar::displayHP(693, 75, 20);
+	Text2D::print2DText(healthText, 50, 75, 20);
+	if(HealthBar::GetHP() > 0 ){
+		HealthBar::displayHP(95, 75, 20);
 	}
+
+	Icons2D::displayIcon(1, 20, 75, 20); // displays hp icon next to hp
+
 	// 2D Text Alex
 
 	// Set shader to use

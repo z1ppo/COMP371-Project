@@ -133,7 +133,7 @@ void ShipEnnemyModel::Draw()
 	// Note this draws a unit Cube
 	// The Model View Projection transforms are computed in the Vertex Shader
 	ShaderType oldShader = (ShaderType)Renderer::GetCurrentShader();
-	Renderer::SetShader(TEX_LIGHT2);
+	Renderer::SetShader(TEX_BLOOM);
 	Renderer::CheckForErrors();
     glUseProgram(Renderer::GetShaderProgramID());
 

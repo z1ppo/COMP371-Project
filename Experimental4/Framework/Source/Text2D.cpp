@@ -30,21 +30,30 @@ void Text2D::init2DText(const char * texturePath){
 	//Text2DShaderID = Renderer::LoadShaders("Text2DVertexShader.vertexshader", "Text2DVertexShader.fragmentshader");
 
 	// Initialize shader
-	setShader();
+
+	// Store old shader
+	prevShaderID = Renderer::GetCurrentShader();
+
+	// Initialize 2D Shader
+	Renderer::SetShader(SHADER_TEXT_2D);
+	Text2DShaderID = Renderer::GetShaderProgramID();
 
 	// Initialize uniforms' IDs
 	Text2DUniformID = glGetUniformLocation(Text2DShaderID, "myTextureSampler");
 
-	// Restore original shader
-	restorePrevShader();
+	// Restore old shader
+	Renderer::SetShader((ShaderType)prevShaderID);
 }
 
 void Text2D::print2DText(const char * text, int x, int y, int size){
-
-
-	//return;
 	// Initialize shader
-	setShader();
+
+	// Store old shader
+	prevShaderID = Renderer::GetCurrentShader();
+
+	// Initialize 2D Shader
+	Renderer::SetShader(SHADER_TEXT_2D);
+	Text2DShaderID = Renderer::GetShaderProgramID();
 
 	// Bind texture
 	// Initialize uniforms' IDs
@@ -131,7 +140,9 @@ void Text2D::print2DText(const char * text, int x, int y, int size){
 	glDisableVertexAttribArray(1);
 	glDisableVertexAttribArray(0);
 
-	restorePrevShader();
+
+	// Restore old shader
+	Renderer::SetShader((ShaderType)prevShaderID);
 }
 
 void Text2D::clean2DText(){
@@ -145,20 +156,4 @@ void Text2D::clean2DText(){
 
 	// Delete shader
 	glDeleteProgram(Text2DShaderID);
-}
-
-void Text2D::setShader()
-{
-	// Store old shader
-	prevShaderID = Renderer::GetCurrentShader();
-
-	// Initialize 2D Shader
-	Renderer::SetShader(SHADER_2D);
-	Text2DShaderID = Renderer::GetShaderProgramID();
-}
-
-void Text2D::restorePrevShader()
-{
-	// Restore old shader
-	Renderer::SetShader((ShaderType)prevShaderID);
 }

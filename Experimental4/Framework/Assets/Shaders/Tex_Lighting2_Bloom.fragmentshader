@@ -84,17 +84,17 @@ void main()
 	}
 	if (texture2D(myTextureSampler, UV).r < 0.3)
 	{
-		bcolor = tc*tc*0.012 + texture2D(myTextureSampler, UV);
+		bcolor = tc*tc*0.01 + texture2D(myTextureSampler, UV);
 	}
 	else
 	{
 		if (texture2D(myTextureSampler, UV).r < 0.5)
 		{
-			bcolor = tc*tc*0.009 + texture2D(myTextureSampler, UV);
+			bcolor = tc*tc*0.008 + texture2D(myTextureSampler, UV);
 		}
 		else
 		{
-			bcolor = tc*tc*0.0075 + texture2D(myTextureSampler, UV);
+			bcolor = tc*tc*0.0071 + texture2D(myTextureSampler, UV);
 		}
 	}
 	AmbEl = bcolor.rgb * materialAmbient;

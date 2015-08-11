@@ -116,6 +116,9 @@
     <ClCompile Include="..\Source\PlanetModel.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\Icons2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\EventManager.h">
@@ -211,6 +214,9 @@
     <ClInclude Include="..\Source\PlanetModel.h">
       <Filter>Source Files\Model</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\Icons2D.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Assets\Shaders\BlueColor.fragmentshader">
@@ -276,10 +282,10 @@
     <None Include="..\Assets\Shaders\Text2DVertexShader.vertexshader">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="..\Assets\Shaders\Tex_Lighting2 _bloom.fragmentshader">
+    <None Include="..\Assets\Shaders\Tex_Lighting2_blur.fragmentshader">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="..\Assets\Shaders\Tex_Lighting2_blur.fragmentshader">
+    <None Include="..\Assets\Shaders\Tex_Lighting2_Bloom.fragmentshader">
       <Filter>Resource Files\Shaders</Filter>
     </None>
   </ItemGroup>

@@ -103,6 +103,7 @@
     <ClCompile Include="..\Source\FirstPersonCamera.cpp" />
     <ClCompile Include="..\Source\HealthBar.cpp" />
     <ClCompile Include="..\Source\HeartModel.cpp" />
+    <ClCompile Include="..\Source\Icons2D.cpp" />
     <ClCompile Include="..\Source\mesh.cpp" />
     <ClCompile Include="..\Source\MeteorModel.cpp" />
     <ClCompile Include="..\Source\objloader.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="..\Source\FirstPersonCamera.h" />
     <ClInclude Include="..\Source\HealthBar.h" />
     <ClInclude Include="..\Source\HeartModel.h" />
+    <ClInclude Include="..\Source\Icons2D.h" />
     <ClInclude Include="..\Source\mesh.h" />
     <ClInclude Include="..\Source\meshData.h" />
     <ClInclude Include="..\Source\MeteorModel.h" />
@@ -180,9 +182,9 @@
     <None Include="..\Assets\Shaders\Texture.vertexshader" />
     <None Include="..\Assets\Shaders\Tex_Lighting.fragmentshader" />
     <None Include="..\Assets\Shaders\Tex_Lighting.vertexshader" />
-    <None Include="..\Assets\Shaders\Tex_Lighting2 _bloom.fragmentshader" />
     <None Include="..\Assets\Shaders\Tex_Lighting2.fragmentshader" />
     <None Include="..\Assets\Shaders\Tex_Lighting2.vertexshader" />
+    <None Include="..\Assets\Shaders\Tex_Lighting2_Bloom.fragmentshader" />
     <None Include="..\Assets\Shaders\Tex_Lighting2_blur.fragmentshader" />
   </ItemGroup>
   <ItemGroup>

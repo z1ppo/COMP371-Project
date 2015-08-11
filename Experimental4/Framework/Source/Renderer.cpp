@@ -106,10 +106,21 @@ void Renderer::Initialize()
                                LoadShaders(shaderPathPrefix + "Tex_Lighting2.vertexshader",
                                            shaderPathPrefix + "Tex_Lighting2.fragmentshader")
                                );
+	// Alex
 	sShaderProgramID.push_back(
 								LoadShaders(shaderPathPrefix + "Text2DVertexShader.vertexshader",
 								shaderPathPrefix + "Text2DVertexShader.fragmentshader")
 								);
+	sShaderProgramID.push_back(
+								LoadShaders(shaderPathPrefix + "2DVertexShader.vertexshader",
+								shaderPathPrefix + "2DVertexShader.fragmentshader")
+								);
+	// Alex
+
+	sShaderProgramID.push_back(
+                               LoadShaders(shaderPathPrefix + "Tex_Lighting2.vertexshader",
+                                           shaderPathPrefix + "Tex_Lighting2_Bloom.fragmentshader")
+                               );
 	sCurrentShader = 0;
 
 }
