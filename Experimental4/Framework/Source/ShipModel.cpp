@@ -39,7 +39,9 @@ ShipModel::ShipModel(int shipTextureID,glm::vec3 size) : Model()
 	firetime = 0.0;
 	fireRate = 0.5;
 	NextProjectle = 0;
-	
+	ExplosionCoef =-1;
+	ExplosionTime = 0;
+	ExplosionCap =0.5;
 }
 
 ShipModel::~ShipModel()
@@ -96,6 +98,19 @@ void ShipModel::Update(float dt)
 		World::GetInstance()->mPlayerProjectile[NextProjectle]->Fire(mPosition);
 		NextProjectle++;
 	}
+	if(!(ExplosionCoef < 0)){
+		ExplosionCoef+=dt;
+		ExplosionTime+=dt;
+		if(ExplosionTime>ExplosionCap){
+		ExplosionTime = 0.0f;
+		ExplosionCoef = -1.0f;
+		}
+	}
+	
+}
+
+void ShipModel::Collision(){
+	ExplosionCoef = 0.0f;
 }
 
 void ShipModel::Draw()
@@ -200,7 +215,11 @@ void ShipModel::Draw()
 		glUniform3f(LightAttenuationID, lightKc, lightKl, lightKq);
 		Renderer::CheckForErrors();
 
-   scene->draw(programID);
+		GLuint ExplosionCoefID = glGetUniformLocation(programID, "ExplosionCoef");
+		glUniform1f(ExplosionCoefID, ExplosionCoef);
+
+	scene->draw(programID);
+	glUniform1f(ExplosionCoefID, -1.0f);
 	
 	
 

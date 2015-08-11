@@ -11,6 +11,8 @@ layout(location = 2) in vec2 vertexUV;
 uniform mat4 WorldTransform;
 uniform mat4 ViewTransform;
 uniform mat4 ProjectionTransform;
+uniform float ExplosionCoef;
+
 
 // light position
 uniform vec4 WorldLightPosition; // if w = 1: Point light, if w = 0: directional light
@@ -34,7 +36,9 @@ void main()
 	mat4 MVP = ProjectionTransform * MV;
 	
 	// Output position of the vertex, in clip space : MVP * position
-	gl_Position =  MVP * vec4(vertexPosition_modelspace,1);
+	//gl_Position =  MVP * vec4(vertexPosition_modelspace,1);
+
+
 	
 	v_color = vec4(1.0f);
 	UV = vertexUV;
@@ -46,6 +50,11 @@ void main()
 	//mat4 normMat4 = transpose(inverse(WorldTransform));
 	normal = transpose(inverse(mat3(MV))) * vertexNormal_modelspace;//normMat4 * vec4(vertexNormal_modelspace,0);
 	normal = normalize(normal);
+	vec4 view_v = MV*vec4(vertexPosition_modelspace,1);
+	if(ExplosionCoef > 0.0f){
+		view_v += ExplosionCoef*normal;
+	}
+	gl_Position = ProjectionTransform * view_v;
 	//normal = vec3(normal4[0],normal4[1],normal4[2]);
 	//vec4 camera_Position4 = MV * vec4(0,0,0,1);
 	//vec3 camera_Position = -vec3(camera_Position4.x,camera_Position4.y,camera_Position4.z);

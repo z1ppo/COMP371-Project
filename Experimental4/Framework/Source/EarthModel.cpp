@@ -18,7 +18,11 @@
 #include "World.h"
 #include "Mesh.h"
 #include "Model.h"
-#include"sceneLoader.h"
+#include "sceneLoader.h"
+#include "EventManager.h"
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/quaternion.hpp>
+#include <GLFW/glfw3.h>
 
 
 // Include GLEW - OpenGL Extension Wrangler
@@ -33,7 +37,7 @@ EarthModel::EarthModel(int shipTextureID,glm::vec3 size) : Model()
 	mTextureID = shipTextureID;
 	earthScene = World::GetInstance()->earthScene;
 
-	mRotationAxis = vec3(0,1,0);
+	mRotationAxis = World::GetInstance()->rotationAxis;
 	
 }
 
@@ -45,8 +49,8 @@ EarthModel::~EarthModel()
 
 void EarthModel::Update(float dt)
 {
-	
-	mRotationAngleInDegrees += 10 *dt;
+
+	mRotationAngleInDegrees += World::GetInstance()->selfRotationConstant * dt;
 
 	//bullet.Update(dt);
 	Model::Update(dt);
@@ -142,7 +146,7 @@ void EarthModel::Draw()
 		// Set shader constants
 	const float ka = 0.2f;
 	Renderer::CheckForErrors();
-	const float kd = 0.8f;
+	const float kd = 1.0f;
 	Renderer::CheckForErrors();
 	const float ks = 0.2f;
 	Renderer::CheckForErrors();

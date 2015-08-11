@@ -19,9 +19,10 @@
 #include "Mesh.h"
 #include "Model.h"
 #include"sceneLoader.h"
-
+#include "EventManager.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/quaternion.hpp>
+#include <GLFW/glfw3.h>
 
 
 // Include GLEW - OpenGL Extension Wrangler
@@ -36,7 +37,7 @@ MoonModel::MoonModel(int shipTextureID,glm::vec3 size) : Model()
 	mTextureID = shipTextureID;
 	earthScene = World::GetInstance()->earthScene;
 
-	mRotationAxis = vec3(0,1,0);
+	mRotationAxis = World::GetInstance()->rotationAxis;
 	
 }
 
@@ -48,14 +49,18 @@ MoonModel::~MoonModel()
 
 void MoonModel::Update(float dt)
 {
+
+
+
+	mRotationAngleInDegrees += World::GetInstance()->selfRotationConstant * dt;
+
 	
-	
-	quat rotQuatA = glm::angleAxis(0.0f,vec3(0,1,0));
-	quat rotQuatB = angleAxis(180.0f,vec3(0,1,0));
-	quat slerpedRotation = slerp(rotQuatA,rotQuatB,-dt/18);
+	quat rotQuatA = glm::angleAxis(0.0f, mRotationAxis);
+	quat rotQuatB = angleAxis(180.0f, mRotationAxis);
+	quat slerpedRotation = slerp(rotQuatA, rotQuatB, World::GetInstance()->orbitRotationConstantNumerator * -dt / World::GetInstance()->orbitRotationConstantDenominator);
 	mat4 rotation = mat4_cast(slerpedRotation);
 	mPosition = vec3(rotation*vec4(mPosition,1.0f));
-
+	
 
 	//bullet.Update(dt);
 	Model::Update(dt);

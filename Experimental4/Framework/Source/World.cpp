@@ -30,6 +30,12 @@
 #include "Projectile.h"
 #include "EarthModel.h"
 #include "MoonModel.h"
+#include "BackgroundSphere.h"
+#include "SunModel.h"
+#include "MarsModel.h"
+
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 
 
@@ -44,9 +50,27 @@ using namespace glm;
 World* World::instance;
 
 
-World::World()
+World::World(int level)
 {
+
     instance = this;
+
+	if (level == 0){
+
+		rotationAxis = vec3(0, 1, 0);
+	}
+	else if (level == 1){
+
+		rotationAxis = vec3(-1, 0, 0);
+	}
+
+
+	orbitRotationConstantNumerator = 1;
+	orbitRotationConstantDenominator = 18;
+
+	stretchConstant = 1;
+
+	selfRotationConstant = 10;
 
 	// Setup Camera
 	mCamera.push_back(new FirstPersonCamera(vec3(3.0f, 1.0f, 5.0f)));
@@ -58,7 +82,7 @@ World::World()
 	// Light Coefficients
 	
 	lightColor =  glm::vec3(1.0f, 1.0f, 1.0f);
-	lightPosition = glm::vec4(2.0f, 2.0f, -2.0f, 0.0f);
+	lightPosition = glm::vec4(2.0f, 0.0f, -2.0f, 0.0f);
 	lightKc = 0.0f;
 	lightKl = 0.0f;
 	lightKq = 1.0f;
@@ -79,53 +103,27 @@ World::World()
 
     mpBillboardList = new BillboardList(2048, billboardTextureID);
 
-    
-    // TODO - You can un-comment out these 2 temporary billboards and particle system
-    // That can help you debug billboards, you can set the billboard texture to billboardTest.png
-    /*    Billboard *b = new Billboard();
-     b->size  = glm::vec2(2.0, 2.0);
-     b->position = glm::vec3(0.0, 3.0, 0.0);
-     b->color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-     
-     Billboard *b2 = new Billboard();
-     b2->size  = glm::vec2(2.0, 2.0);
-     b2->position = glm::vec3(0.0, 3.0, 1.0);
-     b2->color = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
-
-     mpBillboardList->AddBillboard(b);
-     mpBillboardList->AddBillboard(b2);
-
-     
-     ParticleDescriptor* fountainDescriptor = new ParticleDescriptor();
-     fountainDescriptor->SetFireDescriptor();
-     
-     ParticleDescriptor* fireDescriptor = new ParticleDescriptor();
-     fireDescriptor->SetFireDescriptor();
-     
-     ParticleEmitter* emitter = new ParticleEmitter(vec3(0.0f, 0.0f, 0.0f));
-     
-     ParticleSystem* ps = new ParticleSystem(emitter, fountainDescriptor);
-     AddParticleSystem(ps);
-
-     */    // TMP
-
 	nextProjectile = 0;
 	spawntime = 0.0f;
 
+	//Loads the textures
 	shipTextureID = TextureLoader::LoadTexture("../Assets/Textures/ship1.jpg");
-
 	droidTextureID = TextureLoader::LoadTexture("../Assets/Textures/droid.tga");
 	MeteorTextureID = TextureLoader::LoadTexture("../Assets/Textures/meteor.jpg");
 	projTextureID = TextureLoader::LoadTexture("../Assets/Textures/projectile.jpg");
 	moonTextureID = TextureLoader::LoadTexture("../Assets/Textures/moonHD.jpg");
 	earthTextureID = TextureLoader::LoadTexture("../Assets/Textures/earthHD.jpg");
-	spaceTextureID = TextureLoader::LoadTexture("../Assets/Textures/space.png");
+	spaceTextureID = TextureLoader::LoadTexture("../Assets/Textures/spaceNASA2.jpg");
+	sunTextureID = TextureLoader::LoadTexture("../Assets/Textures/sun.jpg");
+	marsTextureID = TextureLoader::LoadTexture("../Assets/Textures/mars.jpg");
+
 
 	 
 	droidScene = new sceneLoader("../Assets/Models/droid.obj");
 	meteorScene = new sceneLoader("../Assets/Models/meteor.obj");
 	projScene = new sceneLoader("../Assets/Models/projectile.obj");
 	earthScene = new sceneLoader("../Assets/Models/earthHD.obj");
+
 }
 
 World::~World()
@@ -184,8 +182,35 @@ World* World::GetInstance()
 
 void World::Update(float dt)
 {
+
+	//Dynamic light test
+
+	quat rotQuatA = glm::angleAxis(0.0f, rotationAxis);
+	quat rotQuatB = angleAxis(180.0f, rotationAxis);
+	quat slerpedRotation = slerp(rotQuatA, rotQuatB, orbitRotationConstantNumerator * - dt / orbitRotationConstantDenominator);
+	mat4 rotation = mat4_cast(slerpedRotation);
+	lightPosition = rotation*lightPosition;
+
 	// User Inputs
 	spawntime+=dt;
+
+	//Warp speed Activation
+
+	if (glfwGetKey(EventManager::GetWindow(), GLFW_KEY_W) == GLFW_PRESS && selfRotationConstant <= 50)
+	{
+		orbitRotationConstantNumerator += 0.1;
+		selfRotationConstant += 1;
+		stretchConstant += 0.1;
+	}
+	else if (glfwGetKey(EventManager::GetWindow(), GLFW_KEY_S) == GLFW_PRESS && selfRotationConstant > 10)
+	{
+		orbitRotationConstantNumerator -= 0.1;
+		selfRotationConstant -= 1;
+		stretchConstant -= 0.1;
+	}
+	else {
+		//stretchConstant = 0;
+	}
 
 	// 0 1 2 to change the Camera
 	if (glfwGetKey(EventManager::GetWindow(), GLFW_KEY_1 ) == GLFW_PRESS)
@@ -206,6 +231,8 @@ void World::Update(float dt)
 			mCurrentCamera = 2;
 		}
 	}
+
+
 
 	// Spacebar to change the shader
 	if (glfwGetKey(EventManager::GetWindow(), GLFW_KEY_0 ) == GLFW_PRESS)
@@ -277,6 +304,8 @@ void World::Draw()
 	glUniformMatrix4fv(VPMatrixLocation, 1, GL_FALSE, &VP[0][0]);
 
 	// Draw models
+
+	//glFrustum(1000.0f, 1000.0f, 1000.0f, 1000.0f, 1000.0f, 1000.0f);
 	for (vector<Model*>::iterator it = mModel.begin(); it < mModel.end(); ++it)
 	{
 		(*it)->Draw();
@@ -389,6 +418,7 @@ void World::LoadScene(const char * scene_path)
 				ShipModel* ship = new ShipModel(shipTextureID);
 				ship->Load(iss);
 				mModel.push_back(ship);
+				mShipModel = ship;
 			}else if(result == "eModel")
 			{
 				
@@ -498,6 +528,28 @@ void World::LoadScene(const char * scene_path)
 
 
 			}
+			else if (result == "BackgroundSphere"){
+				BackgroundSphere* background = new BackgroundSphere(spaceTextureID);
+				background->Load(iss);
+				mModel.push_back(background);
+
+
+			}
+			else if (result == "Sun"){
+				//Loading the sun should set the light at the same position as the sun
+				SunModel* sun = new SunModel(sunTextureID);
+				sun->Load(iss);
+				lightPosition = vec4(sun->GetPosition(),0);
+				mModel.push_back(sun);
+				//
+
+			}
+			else if (result == "Mars"){
+				MarsModel* mars = new MarsModel(marsTextureID);
+				mars->Load(iss);
+				mModel.push_back(mars);
+			}
+
 			else
 			{
 				fprintf(stderr, "Error loading scene file... !");
@@ -515,6 +567,7 @@ void World::LoadScene(const char * scene_path)
 		(*it)->CreateVertexBuffer();
 	}
 }
+
 
 Animation* World::FindAnimation(ci_string animName)
 {

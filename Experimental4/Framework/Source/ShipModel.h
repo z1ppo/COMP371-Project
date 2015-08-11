@@ -24,8 +24,13 @@ public:
 	unsigned int NextProjectle;
 	virtual void Update(float dt);
 	virtual void Draw();
+	virtual void Collision();
 	int mTextureID;
 	sceneLoader* scene;
+
+	float ExplosionCoef;
+	float ExplosionTime;
+	float ExplosionCap;
 
 protected:
 	virtual bool ParseLine(const std::vector<ci_string> &token);

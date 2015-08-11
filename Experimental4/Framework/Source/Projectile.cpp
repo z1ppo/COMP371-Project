@@ -34,6 +34,9 @@ Projectile::Projectile(int shipTextureID,glm::vec3 size) : Model()
 	aim = vec3(0.0f);
 	mTextureID = shipTextureID;
 	projScene = World::GetInstance()->projScene;
+	ExplosionCoef = -1.0;
+	ExplosionTime = 0;
+	ExplosionCap = 0.1;
 
 	
 }
@@ -52,18 +55,27 @@ void Projectile::Update(float dt)
 
 	
 
-	this->SetPosition(this->GetPosition()+(aim*10.0f*dt));
+	this->SetPosition(this->GetPosition() + (aim*World::GetInstance()->selfRotationConstant*dt));
 
 	
 	if(this->GetPosition().z < -2.0f){
 		this->Reset();
 	}
 
-	if (glm::distance(mPosition, World::GetInstance()->mModel[0]->GetPosition()) < 0.872){
-	this->Reset();
+	if (ExplosionCoef < 0 && glm::distance(mPosition, World::GetInstance()->mModel[0]->GetPosition()) < 0.872){
+	ExplosionCoef = dt;
+	aim = vec3(0.0f);
 	printf("COLLISON!!!!!!!!!!!");
+	World::GetInstance()->mShipModel->ShipModel::Collision();
 	}
-
+	if (ExplosionCoef > 0){
+	ExplosionCoef+= 3*dt;
+	ExplosionTime+=dt;
+	float ExplosionCap;
+	}
+	if(ExplosionTime>ExplosionCap){
+		this->Reset();
+	}
 	
 	Model::Update(dt);
 }
@@ -76,7 +88,8 @@ void Projectile::Fire(vec3 parentPos){
 void Projectile::Reset(){
 	mPosition = vec3(5.0 , 5.0, -4.0);
 	aim = vec3(0.0f);
-	
+	ExplosionCoef = -1.0;
+	ExplosionTime= 0;
 }
 
 
@@ -148,7 +161,7 @@ void Projectile::Draw()
 	Renderer::CheckForErrors();
 
 		// Set shader constants
-	const float ka = 0.2f;
+	const float ka = 1.0f;
 	Renderer::CheckForErrors();
 	const float kd = 0.8f;
 	Renderer::CheckForErrors();
@@ -182,8 +195,11 @@ void Projectile::Draw()
 		glUniform3f(LightAttenuationID, lightKc, lightKl, lightKq);
 		Renderer::CheckForErrors();
 
+		GLuint ExplosionCoefID = glGetUniformLocation(programID, "ExplosionCoef");
+		glUniform1f(ExplosionCoefID, ExplosionCoef);
+
    projScene->draw(programID);
-	
+	glUniform1f(ExplosionCoefID, -1.0f);
 	
 
 	// 3rd attribute buffer : vertex color

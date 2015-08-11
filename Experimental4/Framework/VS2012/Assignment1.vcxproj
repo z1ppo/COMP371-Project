@@ -97,11 +97,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Animation.cpp" />
+    <ClCompile Include="..\Source\BackgroundSphere.cpp" />
     <ClCompile Include="..\Source\Billboard.cpp" />
     <ClCompile Include="..\Source\Camera.cpp" />
     <ClCompile Include="..\Source\ChairModel.cpp" />
     <ClCompile Include="..\Source\EarthModel.cpp" />
     <ClCompile Include="..\Source\FirstPersonCamera.cpp" />
+    <ClCompile Include="..\Source\MarsModel.cpp" />
     <ClCompile Include="..\Source\mesh.cpp" />
     <ClCompile Include="..\Source\MeteorModel.cpp" />
     <ClCompile Include="..\Source\MoonModel.cpp" />
@@ -122,16 +124,19 @@
     <ClCompile Include="..\Source\Model.cpp" />
     <ClCompile Include="..\Source\CubeModel.cpp" />
     <ClCompile Include="..\Source\Renderer.cpp" />
+    <ClCompile Include="..\Source\SunModel.cpp" />
     <ClCompile Include="..\Source\TextureLoader.cpp" />
     <ClCompile Include="..\Source\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Animation.h" />
+    <ClInclude Include="..\Source\BackgroundSphere.h" />
     <ClInclude Include="..\Source\Billboard.h" />
     <ClInclude Include="..\Source\Camera.h" />
     <ClInclude Include="..\Source\ChairModel.h" />
     <ClInclude Include="..\Source\EarthModel.h" />
     <ClInclude Include="..\Source\FirstPersonCamera.h" />
+    <ClInclude Include="..\Source\MarsModel.h" />
     <ClInclude Include="..\Source\mesh.h" />
     <ClInclude Include="..\Source\meshData.h" />
     <ClInclude Include="..\Source\MeteorModel.h" />
@@ -153,6 +158,7 @@
     <ClInclude Include="..\Source\Model.h" />
     <ClInclude Include="..\Source\CubeModel.h" />
     <ClInclude Include="..\Source\Renderer.h" />
+    <ClInclude Include="..\Source\SunModel.h" />
     <ClInclude Include="..\Source\TextureLoader.h" />
     <ClInclude Include="..\Source\World.h" />
   </ItemGroup>
@@ -160,6 +166,8 @@
     <None Include="..\Assets\Scenes\AnimatedScene.scene" />
     <None Include="..\Assets\Scenes\AnimatedSceneWithParticles.scene" />
     <None Include="..\Assets\Scenes\CoordinateSystem.scene" />
+    <None Include="..\Assets\Scenes\MarsAnimatedSceneWithParticles.scene" />
+    <None Include="..\Assets\Scenes\MoonAnimatedSceneWithParticles.scene" />
     <None Include="..\Assets\Scenes\StaticScene.scene" />
     <None Include="..\Assets\Shaders\BlueColor.fragmentshader" />
     <None Include="..\Assets\Shaders\PathLines.fragmentshader" />

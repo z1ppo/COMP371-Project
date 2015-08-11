@@ -23,7 +23,10 @@ public:
 	virtual void Draw();
 	int mTextureID;
 	sceneLoader* projScene;
-	void Fire(glm::vec3 parentPos); 
+	void Fire(glm::vec3 parentPos);
+	float ExplosionCoef;
+	float ExplosionTime;
+	float ExplosionCap;
 	void Reset(); 
 
 
