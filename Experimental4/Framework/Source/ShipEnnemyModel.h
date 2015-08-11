@@ -22,6 +22,7 @@ public:
 	float fireRate;
 	float spawntime;
 	float spawnRate;
+	bool dead;
 //	Projectile bullet;
 	virtual void Update(float dt);
 	virtual void Draw();

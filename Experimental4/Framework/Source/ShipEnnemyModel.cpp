@@ -41,6 +41,7 @@ ShipEnnemyModel::ShipEnnemyModel(int shipTextureID,glm::vec3 size) : Model()
 	ExplosionCoef =-1;
 	ExplosionTime = 0;
 	ExplosionCap =0.5;
+	dead = true;
 	
 }
 
@@ -98,16 +99,18 @@ void ShipEnnemyModel::Update(float dt)
 	Model::Update(dt);
 }
 void ShipEnnemyModel::Collision(){
-	ExplosionCoef = 0.0f;
 	int nextHeart =World::GetInstance()->nextHeart;
-	World::GetInstance()->mHeartModel[nextHeart]->Spawn(mPosition);
+	World::GetInstance()->mHeartModel[nextHeart]->SetPosition(this->mPosition);
 	World::GetInstance()->LoadNextHeart();
+	ExplosionCoef = 0.0f;
+	dead = true;
 }
 
 void ShipEnnemyModel::Spawn(){
 							//positionX will be generated randomly between -5 and 5
 		
 		//TINO set X borders for ennemies
+		dead = false;
 		float lBound = -6.0f;
 		float uBound = 6.0f;
 
@@ -119,6 +122,7 @@ void ShipEnnemyModel::Spawn(){
 }
 void ShipEnnemyModel::Reset(){
 	this->SetPosition(vec3(5.0, 5.0, -4.0));
+	dead = true;
 }
 
 void ShipEnnemyModel::Draw()

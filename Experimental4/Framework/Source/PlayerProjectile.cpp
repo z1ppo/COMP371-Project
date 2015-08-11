@@ -63,13 +63,16 @@ void PlayerProjectile::Update(float dt)
 
 	for (vector<ShipEnnemyModel*>::iterator it = World::GetInstance()->mShipEnnemyModel.begin(); it < World::GetInstance()->mShipEnnemyModel.end(); ++it)
 	{
-		
-	if (glm::distance(mPosition, (*it)->GetPosition()) < 0.732){
-	ExplosionCoef = dt;
-	aim = vec3(0.0f);
-	(*it)->Collision();
-	printf("EXPLOSION!");
-	}
+		if(!(*it)->dead)
+		{
+			if (glm::distance(mPosition, (*it)->GetPosition()) < 0.732)
+			{
+				ExplosionCoef = dt;
+				aim = vec3(0.0f);
+				(*it)->Collision();
+				printf("EXPLOSION!");
+			}
+		}
 	}
 	if (ExplosionCoef > 0){
 	ExplosionCoef+= 6*dt;

@@ -719,9 +719,9 @@ nextProjectile++;
 	}
 }
 void World::LoadNextHeart(){
-nextHeart++;
-	if (nextHeart >= 5){
-		nextHeart-= 5;
+	nextHeart+=1;
+	if (nextHeart >= 15){
+		nextHeart-= 15;
 	}
 }
 void World::ResetSpawnTime(){

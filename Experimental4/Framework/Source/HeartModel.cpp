@@ -32,7 +32,7 @@ HeartModel::HeartModel(int shipTextureID,glm::vec3 size) : Model()
 	// Create a vertex array
 	mTextureID = shipTextureID;
 	heartScene = World::GetInstance()->heartScene;
-	
+
 
 	
 }
@@ -45,22 +45,25 @@ HeartModel::~HeartModel()
 
 void HeartModel::Update(float dt)
 {
-	vec3 tempPosition = (glm::vec3(0,0,0.5));
+	//vec3 tempPosition = (glm::vec3(0,0,0.5));
 
 	//mScaling = vec3(0.1, 0.1, 0.1*World::GetInstance()->stretchConstant);
 	//mScaling += vec3(0, 0, 1)*World::GetInstance()->stretchConstant*dt;
 
 	//mPosition.z -= tempPosition.z;
 
-	this->SetPosition(this->GetPosition() - (glm::vec3(0, 0, World::GetInstance()->selfRotationConstant/2)*dt));
-
-	if(this->GetPosition().z < -2.0f){
+	//this->SetPosition(this->GetPosition() - (glm::vec3(0, 0, World::GetInstance()->selfRotationConstant/2)*dt));
+	vec3 aim = World::GetInstance()->mModel[0]->GetPosition() - mPosition;
+	normalize(aim);
+	this->SetPosition(this->GetPosition()+aim*dt);
+	if(this->GetPosition().z < -10.0f){
 		Reset();
-	}else if (this->GetPosition().z < 2.0f)	{
-		if (glm::distance(mPosition, World::GetInstance()->mModel[0]->GetPosition()) < 0.872){
-			Collision();
-		}
 	}
+	//else if (this->GetPosition().z < 2.0f)	{
+	//	if (glm::distance(mPosition, World::GetInstance()->mModel[0]->GetPosition()) < 0.872){
+	//		Collision();
+	//	}
+	//}
 
 
 
@@ -69,15 +72,14 @@ void HeartModel::Update(float dt)
 	Model::Update(dt);
 }
 void HeartModel::Collision(){
-		HealthBar::addHP(1);
-		Reset();
+		//HealthBar::addHP(1);
+		//Reset();
 }
 
 void HeartModel::Spawn(glm::vec3 pos){
 							//positionX will be generated randomly between -5 and 5
 	
 		this->SetPosition(pos);
-		World::GetInstance()->LoadNextHeart();	
 }
 void HeartModel::Reset(){
 	this->SetPosition(vec3(5.0, 5.0, -4.0));
@@ -185,7 +187,8 @@ void HeartModel::Draw()
 		glUniform3f(LightAttenuationID, lightKc, lightKl, lightKq);
 		Renderer::CheckForErrors();
 
-   		GLuint ExplosionCoefID = glGetUniformLocation(programID, "ExplosionCoef");
+   			GLuint ExplosionCoefID = glGetUniformLocation(programID, "ExplosionCoef");
+		glUniform1f(ExplosionCoefID, -1.0f);
 	
 
 	heartScene->draw(programID);
