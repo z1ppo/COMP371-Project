@@ -52,7 +52,7 @@ void main()
 	normal = normalize(normal);
 	vec4 view_v = MV*vec4(vertexPosition_modelspace,1);
 	if(ExplosionCoef > 0.0f){
-		view_v += ExplosionCoef*normal;
+		view_v += ExplosionCoef*vec4(normal,0);
 	}
 	gl_Position = ProjectionTransform * view_v;
 	//normal = vec3(normal4[0],normal4[1],normal4[2]);

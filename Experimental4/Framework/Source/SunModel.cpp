@@ -185,7 +185,8 @@ void SunModel::Draw()
 		Renderer::CheckForErrors();
 		glUniform3f(LightAttenuationID, lightKc, lightKl, lightKq);
 		Renderer::CheckForErrors();
-
+		GLuint ExplosionCoefID = glGetUniformLocation(programID, "ExplosionCoef");
+		glUniform1f(ExplosionCoefID, -1.0f);
    earthScene->draw(programID);
    /*
    glDepthMask(GL_TRUE);

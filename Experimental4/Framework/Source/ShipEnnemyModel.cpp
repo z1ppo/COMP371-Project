@@ -69,7 +69,7 @@ void ShipEnnemyModel::Update(float dt)
 
 	this->SetPosition(this->GetPosition() - (glm::vec3(0, 0, World::GetInstance()->selfRotationConstant/2)*dt));
 
-	//If ennemy position is at -10 for Z position, then bring it at the beginning
+	//If ennemy position is at -2 for Z position, then bring it at the beginning
 	if(this->GetPosition().z < -2.0f){
 		Reset();
 	}
@@ -99,7 +99,8 @@ void ShipEnnemyModel::Update(float dt)
 }
 void ShipEnnemyModel::Collision(){
 	ExplosionCoef = 0.0f;
-	World::GetInstance()->mHeartModel[World::GetInstance()->nextHeart]->Spawn(mPosition);
+	int nextHeart =World::GetInstance()->nextHeart;
+	World::GetInstance()->mHeartModel[nextHeart]->Spawn(mPosition);
 	World::GetInstance()->LoadNextHeart();
 }
 
@@ -223,6 +224,7 @@ void ShipEnnemyModel::Draw()
 		Renderer::CheckForErrors();
 
    		GLuint ExplosionCoefID = glGetUniformLocation(programID, "ExplosionCoef");
+		glUniform1f(ExplosionCoefID, -1.0f);
 		glUniform1f(ExplosionCoefID, ExplosionCoef);
 
 	droidScene->draw(programID);

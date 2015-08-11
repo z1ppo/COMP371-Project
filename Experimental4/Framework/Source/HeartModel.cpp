@@ -19,7 +19,7 @@
 #include "Mesh.h"
 #include "Model.h"
 #include"sceneLoader.h"
-
+#include"HealthBar.h"
 
 // Include GLEW - OpenGL Extension Wrangler
 #include <GL/glew.h>
@@ -45,24 +45,22 @@ HeartModel::~HeartModel()
 
 void HeartModel::Update(float dt)
 {
-	// If you are curious, un-comment this line to have spinning cubes!
-	// That will only work if your world transform is correct...
-	// mRotationAngleInDegrees += 90 * dt; // spins by 90 degrees per second
-
 	vec3 tempPosition = (glm::vec3(0,0,0.5));
 
 	//mScaling = vec3(0.1, 0.1, 0.1*World::GetInstance()->stretchConstant);
 	//mScaling += vec3(0, 0, 1)*World::GetInstance()->stretchConstant*dt;
 
-	float ennemyPositionZ = this->GetPosition().z - tempPosition.z;
+	//mPosition.z -= tempPosition.z;
 
 	this->SetPosition(this->GetPosition() - (glm::vec3(0, 0, World::GetInstance()->selfRotationConstant/2)*dt));
 
-	//If ennemy position is at -10 for Z position, then bring it at the beginning
 	if(this->GetPosition().z < -2.0f){
 		Reset();
+	}else if (this->GetPosition().z < 2.0f)	{
+		if (glm::distance(mPosition, World::GetInstance()->mModel[0]->GetPosition()) < 0.872){
+			Collision();
+		}
 	}
-
 
 
 
@@ -71,14 +69,15 @@ void HeartModel::Update(float dt)
 	Model::Update(dt);
 }
 void HeartModel::Collision(){
-	Reset();
+		HealthBar::addHP(1);
+		Reset();
 }
 
 void HeartModel::Spawn(glm::vec3 pos){
 							//positionX will be generated randomly between -5 and 5
 	
 		this->SetPosition(pos);
-	
+		World::GetInstance()->LoadNextHeart();	
 }
 void HeartModel::Reset(){
 	this->SetPosition(vec3(5.0, 5.0, -4.0));
