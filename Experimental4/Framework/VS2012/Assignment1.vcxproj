@@ -103,6 +103,8 @@
     <ClCompile Include="..\Source\ChairModel.cpp" />
     <ClCompile Include="..\Source\EarthModel.cpp" />
     <ClCompile Include="..\Source\FirstPersonCamera.cpp" />
+    <ClCompile Include="..\Source\HealthBar.cpp" />
+    <ClCompile Include="..\Source\HeartModel.cpp" />
     <ClCompile Include="..\Source\MarsModel.cpp" />
     <ClCompile Include="..\Source\mesh.cpp" />
     <ClCompile Include="..\Source\MeteorModel.cpp" />
@@ -125,6 +127,7 @@
     <ClCompile Include="..\Source\CubeModel.cpp" />
     <ClCompile Include="..\Source\Renderer.cpp" />
     <ClCompile Include="..\Source\SunModel.cpp" />
+    <ClCompile Include="..\Source\Text2D.cpp" />
     <ClCompile Include="..\Source\TextureLoader.cpp" />
     <ClCompile Include="..\Source\World.cpp" />
   </ItemGroup>
@@ -136,6 +139,8 @@
     <ClInclude Include="..\Source\ChairModel.h" />
     <ClInclude Include="..\Source\EarthModel.h" />
     <ClInclude Include="..\Source\FirstPersonCamera.h" />
+    <ClInclude Include="..\Source\HealthBar.h" />
+    <ClInclude Include="..\Source\HeartModel.h" />
     <ClInclude Include="..\Source\MarsModel.h" />
     <ClInclude Include="..\Source\mesh.h" />
     <ClInclude Include="..\Source\meshData.h" />
@@ -159,6 +164,7 @@
     <ClInclude Include="..\Source\CubeModel.h" />
     <ClInclude Include="..\Source\Renderer.h" />
     <ClInclude Include="..\Source\SunModel.h" />
+    <ClInclude Include="..\Source\Text2D.h" />
     <ClInclude Include="..\Source\TextureLoader.h" />
     <ClInclude Include="..\Source\World.h" />
   </ItemGroup>
@@ -176,6 +182,8 @@
     <None Include="..\Assets\Shaders\SolidColor.vertexshader" />
     <None Include="..\Assets\Shaders\SolidColor_Lighting.fragmentshader" />
     <None Include="..\Assets\Shaders\SolidColor_Lighting.vertexshader" />
+    <None Include="..\Assets\Shaders\Text2DVertexShader.fragmentshader" />
+    <None Include="..\Assets\Shaders\Text2DVertexShader.vertexshader" />
     <None Include="..\Assets\Shaders\Texture.fragmentshader" />
     <None Include="..\Assets\Shaders\Texture.vertexshader" />
     <None Include="..\Assets\Shaders\Tex_Lighting.fragmentshader" />

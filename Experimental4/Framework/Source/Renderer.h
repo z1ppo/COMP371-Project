@@ -27,6 +27,7 @@ enum ShaderType
 	SOLID_LIGHT,
 	TEX_LIGHT,
 	TEX_LIGHT2,
+	SHADER_2D,
 	NUM_SHADERS
 };
 

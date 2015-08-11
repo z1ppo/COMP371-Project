@@ -328,3 +328,8 @@ position = 0 0 0
 name     = "Sun"
 scaling  = 0.1 0.1 0.1
 position = 50 0 -23
+
+[Heart]
+name     = "Heart"
+scaling  = 100.0 100.0 100.0
+position = 0.0 0.0 0.0

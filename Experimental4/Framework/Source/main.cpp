@@ -13,6 +13,8 @@
 #include "EventManager.h"
 #include "Billboard.h"
 #include "TextureLoader.h"
+#include "Text2D.h"
+#include "HealthBar.h"
 
 #include <GLFW/glfw3.h>
 
@@ -78,6 +80,8 @@ int main(int argc, char*argv[])
 
 	Renderer::Shutdown();
 	EventManager::Shutdown();
+	Text2D::clean2DText();
+	HealthBar::cleanUpHP();
 	level += 1;
 	}
 	return 0;

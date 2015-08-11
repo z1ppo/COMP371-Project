@@ -18,6 +18,7 @@
 #include "PlayerProjectile.h"
 #include "ShipEnnemyModel.h"
 #include "ShipModel.h"
+#include "HeartModel.h"
 
 class Camera;
 class Model;
@@ -48,6 +49,7 @@ public:
 	int moonTextureID;
 	int sunTextureID;
 	int marsTextureID;
+	int heartTextureID;
 
 	//Models
 
@@ -55,6 +57,7 @@ public:
 	sceneLoader* droidScene;
 	sceneLoader* projScene;
 	sceneLoader* earthScene;
+	sceneLoader* heartScene;
 	void Update(float dt);
 	void Draw();
 
@@ -84,6 +87,7 @@ public:
 	std::vector<Projectile*> mProjectile;
 	std::vector<PlayerProjectile*> mPlayerProjectile;
 	std::vector<ShipEnnemyModel*> mShipEnnemyModel;
+	std::vector<HeartModel*> mHeartModel;
 	ShipModel* mShipModel; 
 	Animation* GetmAnimation(int i);
 	void LoadNextProjectile();
@@ -99,6 +103,11 @@ public:
 	float stretchConstant;
 
 	float selfRotationConstant;
+
+
+
+
+	void IncrementPlayerScore();
     
 private:
     static World* instance;

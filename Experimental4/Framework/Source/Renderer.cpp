@@ -106,6 +106,10 @@ void Renderer::Initialize()
                                LoadShaders(shaderPathPrefix + "Tex_Lighting2.vertexshader",
                                            shaderPathPrefix + "Tex_Lighting2.fragmentshader")
                                );
+	sShaderProgramID.push_back(
+								LoadShaders(shaderPathPrefix + "Text2DVertexShader.vertexshader",
+								shaderPathPrefix + "Text2DVertexShader.fragmentshader")
+								);
 	sCurrentShader = 0;
 
 }

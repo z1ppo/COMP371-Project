@@ -22,6 +22,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/quaternion.hpp>
 #include <GLFW/glfw3.h>
+#include "HealthBar.h"
 
 
 // Include GLEW - OpenGL Extension Wrangler
@@ -111,6 +112,7 @@ void ShipModel::Update(float dt)
 
 void ShipModel::Collision(){
 	ExplosionCoef = 0.0f;
+	HealthBar::removeHP(1);
 }
 
 void ShipModel::Draw()

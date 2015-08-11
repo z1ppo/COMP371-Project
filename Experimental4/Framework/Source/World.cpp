@@ -33,6 +33,7 @@
 #include "BackgroundSphere.h"
 #include "SunModel.h"
 #include "MarsModel.h"
+#include "HeartModel.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/quaternion.hpp>
@@ -43,15 +44,34 @@
 #include "ParticleEmitter.h"
 #include "ParticleSystem.h"
 
+#include "Text2D.h"
+#include "HealthBar.h"
+
 
 using namespace std;
 using namespace glm;
 
 World* World::instance;
 
-
+	// 2D Text Alex
+char timerText[256];
+char scoreText[256];
+char healthText[256];
+float playerScore = 0;
+// 2D Text Alex
 World::World(int level)
 {
+
+
+	// 2DText Alex
+	
+	// Initialize 2d text class with appropriate texture
+	Text2D::init2DText("../Assets/Fonts/Digital-7.tga");
+
+	// Initialize health bar class with appropriate texture
+	HealthBar::initializeHP("../Assets/Textures/Box_Green.png");
+
+	// 2DText Alex
 
     instance = this;
 
@@ -89,6 +109,7 @@ World::World(int level)
 	// Material Coefficients
 
 
+
     
     // TODO: You can play with different textures by changing the billboardTest.bmp to another texture
 #if defined(PLATFORM_OSX)
@@ -116,6 +137,7 @@ World::World(int level)
 	spaceTextureID = TextureLoader::LoadTexture("../Assets/Textures/spaceNASA2.jpg");
 	sunTextureID = TextureLoader::LoadTexture("../Assets/Textures/sun.jpg");
 	marsTextureID = TextureLoader::LoadTexture("../Assets/Textures/mars.jpg");
+	heartTextureID = TextureLoader::LoadTexture("../Assets/Textures/heart.tga");
 
 
 	 
@@ -123,6 +145,7 @@ World::World(int level)
 	meteorScene = new sceneLoader("../Assets/Models/meteor.obj");
 	projScene = new sceneLoader("../Assets/Models/projectile.obj");
 	earthScene = new sceneLoader("../Assets/Models/earthHD.obj");
+	heartScene = new sceneLoader("../Assets/Models/heart.obj");
 
 }
 
@@ -284,8 +307,46 @@ void World::Update(float dt)
     {
         (*it)->Update(dt);
     }
+
+		for (vector<HeartModel*>::iterator it = mHeartModel.begin(); it < mHeartModel.end(); ++it)
+	{
+		 (*it)->Update(dt);
+	}
     
     mpBillboardList->Update(dt);
+
+		// Update 2D Text
+
+	//2D text Alex
+
+	// For speed computation
+	double lastTime = glfwGetTime();
+	int nbFrames = 0;
+
+	// Measure speed
+	double currentTime = glfwGetTime();
+	nbFrames++;
+	if (currentTime - lastTime >= 1.0){ // If last printf() was more than 1sec ago
+		// printf and reset
+		printf("%f ms/frame\n", 1000.0 / double(nbFrames));
+		nbFrames = 0;
+		lastTime += 1.0;
+	}
+
+	sprintf(timerText, "time:%.f", glfwGetTime());
+
+	// test HP addition and subtraction
+	//
+	//if (glfwGetTime() > 5.0f && glfwGetTime() < 5.5f)
+	//{
+	//	HealthBar::removeHP(1);
+	//}
+	//else if (glfwGetTime() > 10.0f && glfwGetTime() < 10.5f)
+	//{
+	//	HealthBar::addHP(1);
+	//}
+
+	// 2D Text Alex
 
 }
 
@@ -293,6 +354,25 @@ void World::Draw()
 {
 	Renderer::BeginFrame();
 	
+	// 2D Text Alex
+
+	// Print the text in timerText to the screen
+	Text2D::print2DText(timerText, 650, 50, 17);
+
+	// Display score counter
+	// When an enemy is destroyed by one of our particles, call function to increase player score by 1
+	// function to call: IncrementPlayerScore()
+	sprintf(scoreText, "score:%.f", playerScore);
+	Text2D::print2DText(scoreText, 650, 25, 20);
+
+	sprintf(healthText, "HP:", playerScore);
+	Text2D::print2DText(healthText, 650, 75, 20);
+	if(HealthBar::GetRemainingHP()>0){
+		HealthBar::displayHP(693, 75, 20);
+	}
+	// 2D Text Alex
+
+	// Set shader to use
 	// Set shader to use
 	glUseProgram(Renderer::GetShaderProgramID());
 
@@ -320,6 +400,10 @@ void World::Draw()
 	}
 
 	for (vector<PlayerProjectile*>::iterator it = mPlayerProjectile.begin(); it < mPlayerProjectile.end(); ++it)
+	{
+		(*it)->Draw();
+	}
+	for (vector<HeartModel*>::iterator it = mHeartModel.begin(); it < mHeartModel.end(); ++it)
 	{
 		(*it)->Draw();
 	}
@@ -528,6 +612,11 @@ void World::LoadScene(const char * scene_path)
 
 
 			}
+			else if(result == "Heart"){
+				HeartModel* heart = new HeartModel(heartTextureID);
+				heart->Load(iss);
+				mHeartModel.push_back(heart);
+			}
 			else if (result == "BackgroundSphere"){
 				BackgroundSphere* background = new BackgroundSphere(spaceTextureID);
 				background->Load(iss);
@@ -632,3 +721,14 @@ nextProjectile++;
 void World::ResetSpawnTime(){
 	spawntime = 0.0f;
 }
+
+// 2D Text Alex
+
+void World::IncrementPlayerScore()
+{
+	playerScore = playerScore + 1.0f;
+
+	// if (playerScore > ? go to new scene (Mars) and reset player score and time
+}
+
+// 2D Text Alex
