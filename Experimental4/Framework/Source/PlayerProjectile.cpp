@@ -34,7 +34,9 @@ PlayerProjectile::PlayerProjectile(int shipTextureID,glm::vec3 size) : Model()
 	aim = vec3(0.0f, 0.0f, 1.0f);
 	mTextureID = shipTextureID;
 	projScene = World::GetInstance()->projScene;
-
+	ExplosionCoef = -1.0;
+	ExplosionTime = 0;
+	ExplosionCap = 0.1;
 	
 }
 
@@ -63,10 +65,19 @@ void PlayerProjectile::Update(float dt)
 	{
 		
 	if (glm::distance(mPosition, (*it)->GetPosition()) < 0.732){
-	this->Reset();
+	ExplosionCoef = dt;
+	aim = vec3(0.0f);
 	(*it)->Collision();
 	printf("EXPLOSION!");
 	}
+	}
+	if (ExplosionCoef > 0){
+	ExplosionCoef+= 6*dt;
+	ExplosionTime+=dt;
+	float ExplosionCap;
+	}
+	if(ExplosionTime>ExplosionCap){
+		this->Reset();
 	}
 
 	
@@ -83,6 +94,8 @@ void PlayerProjectile::Fire(vec3 parentPos){
 void PlayerProjectile::Reset(){
 	mPosition = vec3(-5.0 , 5.0, -4.0);
 	aim = vec3(0.0f);
+	ExplosionCoef = -1.0;
+	ExplosionTime= 0;
 	
 }
 
@@ -189,7 +202,11 @@ void PlayerProjectile::Draw()
 		glUniform3f(LightAttenuationID, lightKc, lightKl, lightKq);
 		Renderer::CheckForErrors();
 
+   		GLuint ExplosionCoefID = glGetUniformLocation(programID, "ExplosionCoef");
+		glUniform1f(ExplosionCoefID, ExplosionCoef);
+
    projScene->draw(programID);
+	glUniform1f(ExplosionCoefID, -1.0f);
 	
 	
 

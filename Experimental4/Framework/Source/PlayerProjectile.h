@@ -26,6 +26,10 @@ public:
 	void Fire(glm::vec3 parentPos); 
 	void Reset(); 
 
+	float ExplosionCoef;
+	float ExplosionTime;
+	float ExplosionCap;
+
 
 
 protected:
