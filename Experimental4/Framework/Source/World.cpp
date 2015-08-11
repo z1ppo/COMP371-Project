@@ -125,6 +125,7 @@ World::World(int level)
     mpBillboardList = new BillboardList(2048, billboardTextureID);
 
 	nextProjectile = 0;
+	nextHeart = 0;
 	spawntime = 0.0f;
 
 	//Loads the textures
@@ -717,7 +718,12 @@ nextProjectile++;
 		nextProjectile-= 15;
 	}
 }
-
+void World::LoadNextHeart(){
+nextHeart++;
+	if (nextHeart >= 5){
+		nextHeart-= 5;
+	}
+}
 void World::ResetSpawnTime(){
 	spawntime = 0.0f;
 }

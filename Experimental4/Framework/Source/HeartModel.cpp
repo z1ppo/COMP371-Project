@@ -32,7 +32,7 @@ HeartModel::HeartModel(int shipTextureID,glm::vec3 size) : Model()
 	// Create a vertex array
 	mTextureID = shipTextureID;
 	heartScene = World::GetInstance()->heartScene;
-
+	
 
 	
 }
@@ -74,18 +74,11 @@ void HeartModel::Collision(){
 	Reset();
 }
 
-void HeartModel::Spawn(){
+void HeartModel::Spawn(glm::vec3 pos){
 							//positionX will be generated randomly between -5 and 5
-		
-		//TINO set X borders for ennemies
-		float lBound = -6.0f;
-		float uBound = 6.0f;
-
-		//TINO position		
-		float ennemyPositionX = lBound + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(uBound-lBound)));
-		vec3 ennemyInitialPosition = vec3(ennemyPositionX, 0.0f, 48.0f);
-		this->SetPosition(ennemyInitialPosition);
-		//this->SetScaling(vec3(3.0f,3.0f,3.0f));
+	
+		this->SetPosition(pos);
+	
 }
 void HeartModel::Reset(){
 	this->SetPosition(vec3(5.0, 5.0, -4.0));

@@ -37,6 +37,7 @@ public:
     static World* GetInstance();
 
 	unsigned int nextProjectile;
+	unsigned int nextHeart;
 
 	//Texture IDs
 
@@ -91,6 +92,7 @@ public:
 	ShipModel* mShipModel; 
 	Animation* GetmAnimation(int i);
 	void LoadNextProjectile();
+	void LoadNextHeart();
 	void ResetSpawnTime();
 
 	//Constants for rotation system

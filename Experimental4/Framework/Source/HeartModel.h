@@ -23,7 +23,7 @@ public:
 	virtual void Update(float dt);
 	virtual void Draw();
 
-	virtual void Spawn();
+	virtual void Spawn(glm::vec3 pos);
 	virtual void Reset();
 	int mTextureID;
 	sceneLoader* heartScene;
@@ -50,3 +50,4 @@ private:
 	unsigned int TextureID;
 	unsigned int Texture;
 };
+

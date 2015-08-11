@@ -19,6 +19,7 @@
 #include "Mesh.h"
 #include "Model.h"
 #include"sceneLoader.h"
+#include "HeartModel.h"
 
 
 // Include GLEW - OpenGL Extension Wrangler
@@ -98,6 +99,8 @@ void ShipEnnemyModel::Update(float dt)
 }
 void ShipEnnemyModel::Collision(){
 	ExplosionCoef = 0.0f;
+	World::GetInstance()->mHeartModel[World::GetInstance()->nextHeart]->Spawn(mPosition);
+	World::GetInstance()->LoadNextHeart();
 }
 
 void ShipEnnemyModel::Spawn(){

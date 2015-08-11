@@ -331,5 +331,21 @@ position = 50 0 -23
 
 [Heart]
 name     = "Heart"
-scaling  = 100.0 100.0 100.0
+scaling  = 2.0 2.0 2.0
+position = 0.0 0.0 0.0
+[Heart]
+name     = "Heart"
+scaling  = 2.0 2.0 2.0
+position = 0.0 0.0 0.0
+[Heart]
+name     = "Heart"
+scaling  = 2.0 2.0 2.0
+position = 0.0 0.0 0.0
+[Heart]
+name     = "Heart"
+scaling  = 2.0 2.0 2.0
+position = 0.0 0.0 0.0
+[Heart]
+name     = "Heart"
+scaling  = 2.0 2.0 2.0
 position = 0.0 0.0 0.0

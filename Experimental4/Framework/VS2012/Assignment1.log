@@ -1,26 +1,29 @@
-﻿Build started 8/11/2015 1:41:16 PM.
+﻿Build started 8/11/2015 2:02:13 PM.
      1>Project "C:\Users\Paul\Documents\GitHub\COMP371-Project\Experimental4\Framework\VS2012\Assignment1.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"../ThirdParty/DevIL/DevILx86-1.7.8/include" /I../ThirdParty/assimp/include /I"../ThirdParty/FreeImage-3170/Source" /I"../ThirdParty/glew-1.10.0/include" /I"../ThirdParty/glfw-3.0.4/include" /I../ThirdParty/glm /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"C:\Users\Paul\Documents\GitHub\COMP371-Project\Experimental4\Framework\VS2012\/../Build/Debug/" /Fd"C:\Users\Paul\Documents\GitHub\COMP371-Project\Experimental4\Framework\VS2012\/../Build/Debug/vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\Source\Animation.cpp ..\Source\BackgroundSphere.cpp ..\Source\Billboard.cpp ..\Source\ChairModel.cpp ..\Source\CubeModel.cpp ..\Source\EarthModel.cpp ..\Source\HeartModel.cpp ..\Source\MarsModel.cpp ..\Source\MeteorModel.cpp ..\Source\Model.cpp ..\Source\MoonModel.cpp ..\Source\ParticleSystem.cpp ..\Source\PlayerProjectile.cpp ..\Source\Projectile.cpp ..\Source\RailCamera.cpp ..\Source\ShipEnnemyModel.cpp ..\Source\ShipModel.cpp ..\Source\SphereModel.cpp ..\Source\SunModel.cpp ..\Source\World.cpp ..\Source\main.cpp
+         ShipEnnemyModel.cpp
+     1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\shipennemymodel.cpp(39): warning C4305: '=' : truncation from 'double' to 'float'
+         HeartModel.cpp
+         Generating Code...
+         Compiling...
          main.cpp
          World.cpp
-     1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\world.cpp(224): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\world.cpp(226): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\world.cpp(230): warning C4305: '-=' : truncation from 'double' to 'float'
-     1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\world.cpp(232): warning C4305: '-=' : truncation from 'double' to 'float'
-     1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\world.cpp(336): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\world.cpp(225): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\world.cpp(227): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\world.cpp(231): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\world.cpp(233): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\world.cpp(337): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\world.cpp(365): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\world.cpp(366): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\world.cpp(368): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\world.cpp(369): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
          GLM: angleAxis function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
          SunModel.cpp
          GLM: angleAxis function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
          SphereModel.cpp
          ShipModel.cpp
-         ShipEnnemyModel.cpp
-     1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\shipennemymodel.cpp(38): warning C4305: '=' : truncation from 'double' to 'float'
          RailCamera.cpp
          Projectile.cpp
      1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\projectile.cpp(39): warning C4305: '=' : truncation from 'double' to 'float'
@@ -32,6 +35,8 @@
          GLM: rotate function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
          MoonModel.cpp
          GLM: angleAxis function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+         Model.cpp
+         GLM: rotate function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
          MeteorModel.cpp
          MarsModel.cpp
          EarthModel.cpp
@@ -40,11 +45,6 @@
          Billboard.cpp
      1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\billboard.cpp(34): warning C4018: '<' : signed/unsigned mismatch
          BackgroundSphere.cpp
-         Generating Code...
-         Compiling...
-         Model.cpp
-         GLM: rotate function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
-         HeartModel.cpp
          Animation.cpp
      1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\animation.cpp(65): warning C4018: '<' : signed/unsigned mismatch
      1>c:\users\paul\documents\github\comp371-project\experimental4\framework\source\animation.cpp(174): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
@@ -85,12 +85,9 @@
          "C:\Users\Paul\Documents\GitHub\COMP371-Project\Experimental4\Framework\VS2012\/../Build/Debug/Text2D.obj"
          "C:\Users\Paul\Documents\GitHub\COMP371-Project\Experimental4\Framework\VS2012\/../Build/Debug/TextureLoader.obj"
          "C:\Users\Paul\Documents\GitHub\COMP371-Project\Experimental4\Framework\VS2012\/../Build/Debug/World.obj"
-     1>LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-     1>LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-     1>glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\Paul\Documents\GitHub\COMP371-Project\Experimental4\Framework\Bin\vc100.pdb'; linking object as if no debug info
          Assignment1.vcxproj -> C:\Users\Paul\Documents\GitHub\COMP371-Project\Experimental4\Framework\VS2012\/../Bin/Assignment1-Debug.exe
      1>Done Building Project "C:\Users\Paul\Documents\GitHub\COMP371-Project\Experimental4\Framework\VS2012\Assignment1.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:46.07
+Time Elapsed 00:00:44.01
