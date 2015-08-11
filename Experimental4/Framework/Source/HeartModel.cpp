@@ -45,6 +45,7 @@ HeartModel::~HeartModel()
 
 void HeartModel::Update(float dt)
 {
+	 mRotationAngleInDegrees += 90 * dt;
 	//vec3 tempPosition = (glm::vec3(0,0,0.5));
 
 	//mScaling = vec3(0.1, 0.1, 0.1*World::GetInstance()->stretchConstant);
@@ -54,16 +55,16 @@ void HeartModel::Update(float dt)
 
 	//this->SetPosition(this->GetPosition() - (glm::vec3(0, 0, World::GetInstance()->selfRotationConstant/2)*dt));
 	vec3 aim = World::GetInstance()->mModel[0]->GetPosition() - mPosition;
-	normalize(aim);
-	this->SetPosition(this->GetPosition()+aim*dt);
-	if(this->GetPosition().z < -10.0f){
+	aim = normalize(aim);
+	this->SetPosition(this->GetPosition()+aim*5.0f*dt);
+	if(this->GetPosition().z < -2.0f){
 		Reset();
 	}
-	//else if (this->GetPosition().z < 2.0f)	{
-	//	if (glm::distance(mPosition, World::GetInstance()->mModel[0]->GetPosition()) < 0.872){
-	//		Collision();
-	//	}
-	//}
+	else if (this->GetPosition().z < 2.0f)	{
+		if (glm::distance(mPosition, World::GetInstance()->mModel[0]->GetPosition()) < 0.872){
+			Collision();
+		}
+	}
 
 
 
@@ -72,12 +73,12 @@ void HeartModel::Update(float dt)
 	Model::Update(dt);
 }
 void HeartModel::Collision(){
-		//HealthBar::addHP(1);
-		//Reset();
+		HealthBar::addHP(1);
+		Reset();
 }
 
 void HeartModel::Spawn(glm::vec3 pos){
-							//positionX will be generated randomly between -5 and 5
+							
 	
 		this->SetPosition(pos);
 }
@@ -153,7 +154,7 @@ void HeartModel::Draw()
 	Renderer::CheckForErrors();
 
 		// Set shader constants
-	const float ka = 0.2f;
+	const float ka = 1.2f;
 	Renderer::CheckForErrors();
 	const float kd = 0.8f;
 	Renderer::CheckForErrors();
