@@ -18,7 +18,8 @@ class ParticleEmitter
 public:
     ParticleEmitter(glm::vec3 position, const Model* parent = nullptr);
     virtual glm::vec3 GetRandomPosition(); // Would be random for line / circle emitters
-    
+    virtual void setPosition(glm::vec3 position); //TINO
+
 private:
     const Model* mpParent;
     glm::vec3 mPosition;

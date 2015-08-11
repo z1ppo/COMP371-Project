@@ -28,11 +28,12 @@
 #include "ShipEnnemyModel.h"//TINO
 #include "MeteorModel.h"
 #include "Projectile.h"
-#include "EarthModel.h"
-#include "MoonModel.h"
-#include "BackgroundSphere.h"
-#include "SunModel.h"
-#include "MarsModel.h"
+#include "PlanetModel.h"
+//#include "EarthModel.h"
+//#include "MoonModel.h"
+//#include "BackgroundSphere.h"
+//#include "SunModel.h"
+//#include "MarsModel.h"
 #include "HeartModel.h"
 
 #include <glm/gtc/matrix_transform.hpp>
@@ -124,6 +125,19 @@ World::World(int level)
 
     mpBillboardList = new BillboardList(2048, billboardTextureID);
 
+
+		ParticleDescriptor* fountainDescriptor = new ParticleDescriptor();//Tino
+     fountainDescriptor->SetFireDescriptorDamage();//Tino
+	 //emitter = new ParticleEmitter(vec3(0.0f, 0.0f, 0.0f));//Tino
+	// ParticleSystem* ps = new ParticleSystem(emitter, fountainDescriptor);//Tino
+	// AddParticleSystem(ps);//Tino
+
+     ParticleDescriptor* explosionDescriptor = new ParticleDescriptor();//Tino
+     explosionDescriptor->SetRingExplosion();//Tino
+	 emitter_ennemy = new ParticleEmitter(vec3(5.0f, 0.0f, 0.0f));//Tino
+	 ParticleSystem* ps2 = new ParticleSystem(emitter_ennemy, explosionDescriptor);//Tino
+	 AddParticleSystem(ps2);//Tino
+
 	nextProjectile = 0;
 	nextHeart = 0;
 	spawntime = 0.0f;
@@ -145,7 +159,7 @@ World::World(int level)
 	droidScene = new sceneLoader("../Assets/Models/droid.obj");
 	meteorScene = new sceneLoader("../Assets/Models/meteor.obj");
 	projScene = new sceneLoader("../Assets/Models/projectile.obj");
-	earthScene = new sceneLoader("../Assets/Models/earthHD.obj");
+	planetScene = new sceneLoader("../Assets/Models/earthHD.obj");
 	heartScene = new sceneLoader("../Assets/Models/heart.obj");
 
 }
@@ -592,6 +606,10 @@ void World::LoadScene(const char * scene_path)
 				Projectile* proj = new Projectile(projTextureID);
 				proj->Load(iss);
 				mProjectile.push_back(proj);
+			}	else if(result == "Heart"){
+				HeartModel* heart = new HeartModel(heartTextureID);
+				heart->Load(iss);
+				mHeartModel.push_back(heart);
 			}
 
 			else if(result == "mpModel")
@@ -599,27 +617,26 @@ void World::LoadScene(const char * scene_path)
 				PlayerProjectile* proj = new PlayerProjectile(projTextureID);
 				proj->Load(iss);
 				mPlayerProjectile.push_back(proj);
-			}else if(result == "Earth"){
-				EarthModel* earth = new EarthModel(earthTextureID);
+			}
+			else if(result == "Earth"){
+
+				//EarthModel* earth = new EarthModel(earthTextureID);
+				PlanetModel* earth = new PlanetModel(earthTextureID, true, false, vec4(0.2f, 1.0f, 0.5f, 90.0f));
 				earth->Load(iss);
 				mModel.push_back(earth);
 
 
 			}
 			else if(result == "Moon"){
-				MoonModel* moon = new MoonModel(moonTextureID);
+				PlanetModel* moon = new PlanetModel(moonTextureID, true, true, vec4(0.2f, 0.6f, 0.2f, 90.0f));
 				moon->Load(iss);
 				mModel.push_back(moon);
 
 
 			}
-			else if(result == "Heart"){
-				HeartModel* heart = new HeartModel(heartTextureID);
-				heart->Load(iss);
-				mHeartModel.push_back(heart);
-			}
 			else if (result == "BackgroundSphere"){
-				BackgroundSphere* background = new BackgroundSphere(spaceTextureID);
+				//BackgroundSphere* background = new BackgroundSphere(spaceTextureID);
+				PlanetModel* background = new PlanetModel(spaceTextureID, true, false, vec4(0.4f, 0.8f, 0.0f, 90.0f));
 				background->Load(iss);
 				mModel.push_back(background);
 
@@ -627,15 +644,17 @@ void World::LoadScene(const char * scene_path)
 			}
 			else if (result == "Sun"){
 				//Loading the sun should set the light at the same position as the sun
-				SunModel* sun = new SunModel(sunTextureID);
+				//SunModel* sun = new SunModel(sunTextureID);
+				PlanetModel* sun = new PlanetModel(sunTextureID, true, true, vec4(1.5f, 0.8f, 0.2f, 90.0f));
 				sun->Load(iss);
 				lightPosition = vec4(sun->GetPosition(),0);
 				mModel.push_back(sun);
-				//
+				
 
 			}
 			else if (result == "Mars"){
-				MarsModel* mars = new MarsModel(marsTextureID);
+				//MarsModel* mars = new MarsModel(marsTextureID);
+				PlanetModel* mars = new PlanetModel(marsTextureID, true, false, vec4(0.2f, 1.0f, 0.2f, 90.0f));
 				mars->Load(iss);
 				mModel.push_back(mars);
 			}

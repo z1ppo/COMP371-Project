@@ -320,3 +320,75 @@ position = -30 -20 25
 name     = "Sun"
 scaling  = 0.1 0.1 0.1
 position = 0 0 40
+
+[Heart]
+name     = "Heart"
+scaling  = 2.0 2.0 2.0
+position = 0.0 0.0 0.0
+[Heart]
+name     = "Heart"
+scaling  = 2.0 2.0 2.0
+position = 0.0 0.0 0.0
+[Heart]
+name     = "Heart"
+scaling  = 2.0 2.0 2.0
+position = 0.0 0.0 0.0
+[Heart]
+name     = "Heart"
+scaling  = 2.0 2.0 2.0
+position = 0.0 0.0 0.0
+[Heart]
+name     = "Heart"
+scaling  = 2.0 2.0 2.0
+position = 0.0 0.0 0.0
+
+[Heart]
+name     = "Heart"
+scaling  = 2.0 2.0 2.0
+position = 0.0 0.0 0.0
+
+[Heart]
+name     = "Heart"
+scaling  = 2.0 2.0 2.0
+position = 0.0 0.0 0.0
+
+[Heart]
+name     = "Heart"
+scaling  = 2.0 2.0 2.0
+position = 0.0 0.0 0.0
+
+[Heart]
+name     = "Heart"
+scaling  = 2.0 2.0 2.0
+position = 0.0 0.0 0.0
+
+[Heart]
+name     = "Heart"
+scaling  = 2.0 2.0 2.0
+position = 0.0 0.0 0.0
+
+[Heart]
+name     = "Heart"
+scaling  = 2.0 2.0 2.0
+position = 0.0 0.0 0.0
+
+[Heart]
+name     = "Heart"
+scaling  = 2.0 2.0 2.0
+position = 0.0 0.0 0.0
+
+[Heart]
+name     = "Heart"
+scaling  = 2.0 2.0 2.0
+position = 0.0 0.0 0.0
+
+[Heart]
+name     = "Heart"
+scaling  = 2.0 2.0 2.0
+position = 0.0 0.0 0.0
+
+[Heart]
+name     = "Heart"
+scaling  = 2.0 2.0 2.0
+position = 0.0 0.0 0.0
+

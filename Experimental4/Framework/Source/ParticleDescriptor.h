@@ -21,6 +21,10 @@ public:
     
     void SetFountainDescriptor();
     void SetFireDescriptor();
+	void SetFireDescriptorDamage();//TINO
+	void SetFireDescriptorDamage2();//TINO
+	void SetFireDescriptorDamage3();//TINO
+	void SetRingExplosion();//TINO
     
 private:
     

@@ -61,3 +61,96 @@ void ParticleDescriptor::SetFireDescriptor()
     totalLifetime = 0.8f;
     totalLifetimeDelta = 0.0f;
 }
+
+void ParticleDescriptor::SetFireDescriptorDamage()//TINO
+{
+    velocity = vec3(0.0f, 1.0f, 0.0f);
+    velocityDeltaAngle = 4.0f;
+    
+    acceleration = vec3(0.0f, 1.0f, 0.0f);
+    
+    initialSize = vec2(0.1f, 0.1f);
+    initialSizeDelta = vec2(0.01f, 0.01f);
+    
+    sizeGrowthVelocity = vec2(0.1f, 0.1f);
+    
+    initialColor = vec4(1.0f, 1.0f, 0.0f, 1.0f);
+    midColor = vec4(1.0f, 0.5f, 0.0f, 0.5f);
+    endColor = vec4(0.0f, 0.0f, 0.0f, 0.2f);
+
+    emissionRate = 25.0f;
+    fadeInTime = 0.7f;
+    fadeOutTime = 0.7f;
+    totalLifetime = 1.7f;
+    totalLifetimeDelta = 0.0f;
+}
+
+
+void ParticleDescriptor::SetFireDescriptorDamage2()//TINO
+{
+    velocity = vec3(0.0f, 2.0f, 0.0f);
+    velocityDeltaAngle = 60.0f;
+    
+    acceleration = vec3(0.0f, 1.0f, 0.0f);
+    
+    initialSize = vec2(0.5f, 0.5);
+    initialSizeDelta = vec2(0.02f, 0.02f);
+    
+    sizeGrowthVelocity = vec2(0.2f, 0.2f);
+    
+    initialColor = vec4(1.0f, 1.0f, 0.0f, 1.0f);
+    midColor = vec4(1.0f, 0.5f, 0.0f, 0.5f);
+    endColor = vec4(0.0f, 0.0f, 0.0f, 0.2f);
+
+    emissionRate = 25.0f;
+    fadeInTime = 0.7f;
+    fadeOutTime = 0.7f;
+    totalLifetime = 1.7f;
+    totalLifetimeDelta = 0.0f;
+}
+
+void ParticleDescriptor::SetFireDescriptorDamage3()//TINO 
+{
+    velocity = vec3(0.0f, 4.0f, 0.0f);
+    velocityDeltaAngle = 90.0f;
+    
+    acceleration = vec3(0.0f, 1.0f, 0.0f);
+    
+    initialSize = vec2(0.01f, 0.01);
+    initialSizeDelta = vec2(0.01f, 0.01f);
+    
+    sizeGrowthVelocity = vec2(0.2f, 0.2f);
+    
+    initialColor = vec4(1.0f, 0.9f, 0.0f, 1.0f);
+    midColor = vec4(1.0f, 0.5f, 0.0f, 0.5f);
+    endColor = vec4(0.0f, 0.0f, 0.0f, 0.2f);
+
+    emissionRate = 30.0f;
+    fadeInTime = 0.7f;
+    fadeOutTime = 0.7f;
+    totalLifetime = 1.7f;
+    totalLifetimeDelta = 0.0f;
+}
+
+void ParticleDescriptor::SetRingExplosion()//TINO 
+{
+    velocity = vec3(1.0f, 1.0f, 1.0f);
+    velocityDeltaAngle = 90.0f;
+    
+    acceleration = vec3(0.0f, 0.0f, 0.0f);
+    
+    initialSize = vec2(2.0f, 2.0f);
+    initialSizeDelta = vec2(0.01f, 0.01f);
+    
+    sizeGrowthVelocity = vec2(0.1f, 0.1f);
+    
+    initialColor = vec4(1.0f, 0.9f, 0.0f, 1.0f);
+    midColor = vec4(1.0f, 0.5f, 0.0f, 0.5f);
+    endColor = vec4(0.0f, 0.0f, 0.0f, 0.2f);
+
+    emissionRate = 100.0f;
+    fadeInTime = 0.1f;
+    fadeOutTime = 0.4f;
+    totalLifetime = 0.8f;
+    totalLifetimeDelta = 0.0f;
+}

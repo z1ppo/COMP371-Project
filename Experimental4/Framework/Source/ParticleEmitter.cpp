@@ -41,6 +41,9 @@ glm::vec3 ParticleEmitter::GetRandomPosition()
 	}
 }
 
+void ParticleEmitter::setPosition(vec3 Position){//TINO
+	mPosition = Position;
+}
 
 
 

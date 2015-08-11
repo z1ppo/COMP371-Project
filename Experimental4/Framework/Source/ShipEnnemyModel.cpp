@@ -104,6 +104,7 @@ void ShipEnnemyModel::Collision(){
 	World::GetInstance()->LoadNextHeart();
 	ExplosionCoef = 0.0f;
 	dead = true;
+	World::GetInstance()->emitter_ennemy->setPosition(mPosition);
 }
 
 void ShipEnnemyModel::Spawn(){
@@ -193,7 +194,7 @@ void ShipEnnemyModel::Draw()
 	Renderer::CheckForErrors();
 
 		// Set shader constants
-	const float ka = 0.2f;
+	const float ka = 0.5f;
 	Renderer::CheckForErrors();
 	const float kd = 0.8f;
 	Renderer::CheckForErrors();

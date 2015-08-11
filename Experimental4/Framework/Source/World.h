@@ -19,6 +19,8 @@
 #include "ShipEnnemyModel.h"
 #include "ShipModel.h"
 #include "HeartModel.h"
+#include "ParticleEmitter.h"//Tino
+#include "MeteorModel.h"//Tino
 
 class Camera;
 class Model;
@@ -51,13 +53,18 @@ public:
 	int sunTextureID;
 	int marsTextureID;
 	int heartTextureID;
+	ParticleEmitter* emitter_ennemy;//Tino made global
+	ShipModel* ship;//Tino made global
+	ParticleEmitter* emitter;//Tino made global
+	ShipEnnemyModel* ennemy;//Tino made it global
+	MeteorModel* Meteor[3];//Tino made it global
 
 	//Models
 
 	sceneLoader* meteorScene;
 	sceneLoader* droidScene;
 	sceneLoader* projScene;
-	sceneLoader* earthScene;
+	sceneLoader* planetScene;
 	sceneLoader* heartScene;
 	void Update(float dt);
 	void Draw();
