@@ -297,7 +297,6 @@ scaling  = 0.1 0.1 0.1
 position = 0.0 0.0 55.0
 
 [Meteor]
-
 name     = "Meteor"
 scaling  = 0.1 0.1 0.1
 position = 0.0 0.0 0.0
