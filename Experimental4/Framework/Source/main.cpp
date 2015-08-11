@@ -25,64 +25,64 @@ int main(int argc, char*argv[])
 	int level = 0;
 	while (level < 2){
 
-	EventManager::Initialize();
-	Renderer::Initialize();
+		EventManager::Initialize();
+		Renderer::Initialize();
 
-	World world = World(level);    
-    
-	if (argc > 1)
-	{
-		world.LoadScene(argv[1]);
-	}
-	else
-	{
-		// TODO - You can alternate between different scenes for testing different things
-		// Static Scene contains no animation
-		// Animated Scene does
-#if defined(PLATFORM_OSX)		
-		world.LoadScene("Scenes/AnimatedSceneWithParticles.scene");
-//		world.LoadScene("Scenes/AnimatedScene.scene");
-//		world.LoadScene("Scenes/StaticScene.scene");
-//		world.LoadScene("Scenes/CoordinateSystem.scene");
-#else
-		if (level == 0) { world.LoadScene("../Assets/Scenes/AnimatedSceneWithParticles.scene"); }
-		if (level == 1) { world.LoadScene("../Assets/Scenes/MarsAnimatedSceneWithParticles.scene"); }
-//		world.LoadScene("../Assets/Scenes/AnimatedScene.scene");
-//		world.LoadScene("../Assets/Scenes/StaticScene.scene");
-//		world.LoadScene("../Assets/Scenes/CoordinateSystem.scene");
-#endif
-	}
+		World world = World(level);    
 
-	// Main Loop
-
-
-	do
-	{
-		// Update Event Manager - Frame time / input / events processing 
-		EventManager::Update();
-
-		// Update World
-		float dt = EventManager::GetFrameTime();
-
-		//Different level testing
-
-		if (glfwGetKey(EventManager::GetWindow(), GLFW_KEY_L) == GLFW_PRESS)
+		if (argc > 1)
 		{
-			break;
+			world.LoadScene(argv[1]);
+		}
+		else
+		{
+			// TODO - You can alternate between different scenes for testing different things
+			// Static Scene contains no animation
+			// Animated Scene does
+#if defined(PLATFORM_OSX)		
+			world.LoadScene("Scenes/AnimatedSceneWithParticles.scene");
+			//		world.LoadScene("Scenes/AnimatedScene.scene");
+			//		world.LoadScene("Scenes/StaticScene.scene");
+			//		world.LoadScene("Scenes/CoordinateSystem.scene");
+#else
+			if (level == 0) { world.LoadScene("../Assets/Scenes/AnimatedSceneWithParticles.scene"); }
+			if (level == 1) { world.LoadScene("../Assets/Scenes/MarsAnimatedSceneWithParticles.scene"); }
+			//		world.LoadScene("../Assets/Scenes/AnimatedScene.scene");
+			//		world.LoadScene("../Assets/Scenes/StaticScene.scene");
+			//		world.LoadScene("../Assets/Scenes/CoordinateSystem.scene");
+#endif
 		}
 
-		world.Update(dt);
+		// Main Loop
 
-		// Draw World
-		world.Draw();        
-	}
-	while(EventManager::ExitRequested() == false);
 
-	Renderer::Shutdown();
-	EventManager::Shutdown();
-	Text2D::clean2DText();
-	HealthBar::cleanUpHP();
-	level += 1;
+		do
+		{
+			// Update Event Manager - Frame time / input / events processing 
+			EventManager::Update();
+
+			// Update World
+			float dt = EventManager::GetFrameTime();
+
+			//Different level testing
+
+			if (glfwGetKey(EventManager::GetWindow(), GLFW_KEY_L) == GLFW_PRESS)
+			{
+				break;
+			}
+
+			world.Update(dt);
+
+			// Draw World
+			world.Draw();        
+		}
+		while(EventManager::ExitRequested() == false);
+
+		Renderer::Shutdown();
+		EventManager::Shutdown();
+		Text2D::clean2DText();
+		HealthBar::cleanUpHP();
+		level += 1;
 	}
 	return 0;
 }

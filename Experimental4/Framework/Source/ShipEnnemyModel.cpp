@@ -105,6 +105,7 @@ void ShipEnnemyModel::Collision(){
 	ExplosionCoef = 0.0f;
 	dead = true;
 	World::GetInstance()->emitter_ennemy->setPosition(mPosition);
+	World::GetInstance()->IncrementPlayerScore();
 }
 
 void ShipEnnemyModel::Spawn(){

@@ -180,8 +180,10 @@
     <None Include="..\Assets\Shaders\Texture.vertexshader" />
     <None Include="..\Assets\Shaders\Tex_Lighting.fragmentshader" />
     <None Include="..\Assets\Shaders\Tex_Lighting.vertexshader" />
+    <None Include="..\Assets\Shaders\Tex_Lighting2 _bloom.fragmentshader" />
     <None Include="..\Assets\Shaders\Tex_Lighting2.fragmentshader" />
     <None Include="..\Assets\Shaders\Tex_Lighting2.vertexshader" />
+    <None Include="..\Assets\Shaders\Tex_Lighting2_blur.fragmentshader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Assets\Textures\BillboardTest.bmp" />
