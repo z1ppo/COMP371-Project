@@ -64,7 +64,7 @@ float playerScore = 0;
 World::World(int level)
 {
 
-
+	currentLevel = level;
 	// 2DText Alex
 	
 	// Initialize 2d text class with appropriate texture

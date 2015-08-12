@@ -35,7 +35,7 @@ public:
 	World(int level);
 	~World();
 	
-
+	unsigned int currentLevel;
     static World* GetInstance();
 
 	unsigned int nextProjectile;
