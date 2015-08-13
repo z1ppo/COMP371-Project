@@ -1,0 +1,61 @@
+#version 330 core
+
+
+
+
+
+in vec2 UV;
+
+
+// Ouput data
+out vec4 color;
+
+// Values that stay constant for the whole mesh.
+uniform sampler2D myTextureSampler;
+uniform vec2 shockCenter; 
+uniform float shockTime;
+
+void main()
+{
+	vec4 textureColor = texture( myTextureSampler, UV );
+	vec2 texCoord = UV;
+	if(shockTime > 0.0f){
+		float distance = distance(UV, shockCenter);
+		if ( (distance <= (shockTime + 0.1f)) && (distance >= (shockTime - 0.1f)) ) 
+		{
+			float diff = (distance - shockTime); 
+			float powDiff = 1.0 - pow(abs(diff*10.0f), 0.8f); 
+			float diffTime = diff  * powDiff; 
+			vec2 diffUV = normalize(UV - shockCenter); 
+			texCoord = UV + (diffUV * diffTime);
+		} 
+	}
+	vec4 tc = vec4(0.0f);
+	int j;
+	int i;
+	vec4 bcolor;
+	for( i= -4 ;i < 4; i++)
+	{
+		for ( j = -3; j < 3; j++)
+		{
+			tc += texture2D(myTextureSampler, texCoord + vec2(j, i)*0.004) * 0.25;
+		}
+	}
+	if (texture2D(myTextureSampler, texCoord).r < 0.3)
+	{
+		bcolor = tc*tc*0.01 + texture2D(myTextureSampler, texCoord);
+	}
+	else
+	{
+		if (texture2D(myTextureSampler, texCoord).r < 0.5)
+		{
+			bcolor = tc*tc*0.008 + texture2D(myTextureSampler, texCoord);
+		}
+		else
+		{
+			bcolor = tc*tc*0.0071 + texture2D(myTextureSampler, texCoord);
+		}
+	}
+
+	color = bcolor;
+}
