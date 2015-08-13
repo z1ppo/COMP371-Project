@@ -256,6 +256,7 @@ World::World(int level)
 	quad_programID = Renderer::GetShaderProgramID();
 	Renderer::SetShader(oldShader);
 	texID = glGetUniformLocation(quad_programID, "renderedTexture");
+	shockTime = -1.0f;
 }
 
 World::~World()
@@ -468,7 +469,16 @@ void World::Update(float dt)
 
 	// 2D Text Alex
 
+	if (mShipModel->ExplosionCoef > 0 && shockTime < 3.0f){
+		
+			//shockTime = dt;
+			shockTime += dt;
+			if(shockTime > 2.0f ){
+			shockTime = dt;
+			}
 
+		
+	}
 
 
 }
@@ -655,7 +665,19 @@ void World::Draw()
 		glUniform1i(texID, 0);
 		Renderer::CheckForErrors();
 		//glUniform1f(timeID, (float)(glfwGetTime()*10.0f) );
-
+		GLuint shockCenter = glGetUniformLocation(quad_programID, "shockCenter");
+		const Camera* cCamera = GetCurrentCamera();
+		
+		glm::vec4 shipOnScreen4 = (cCamera->GetViewProjectionMatrix()*(vec4(mShipModel->GetPosition(),1)));
+		glm::vec2 shipOnScreen2 = vec2(shipOnScreen4.x/shipOnScreen4.w, shipOnScreen4.y/shipOnScreen4.w);
+		shipOnScreen2.x = (shipOnScreen2.x + 1.0f)*0.5f;
+		shipOnScreen2.y = (shipOnScreen2.y + 1.0f)*0.5f;
+		std::cout << shipOnScreen2.x<<endl;
+		std::cout << shipOnScreen2.y<<endl<<endl;
+		//std::cout << shockTime;
+		glUniform2f(shockCenter, shipOnScreen2.x,shipOnScreen2.y);
+		GLuint shockTimeID = glGetUniformLocation(quad_programID, "shockTime");
+		glUniform1f(shockTimeID, shockTime );
 		// 1rst attribute buffer : vertices
 		glEnableVertexAttribArray(0);
 		Renderer::CheckForErrors();

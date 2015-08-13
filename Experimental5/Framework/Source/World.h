@@ -143,6 +143,7 @@ public:
 	GLuint quad_vertexbuffer;
 	GLuint texID;
 	GLuint quad_programID;
+	float shockTime;
     
 private:
     static World* instance;

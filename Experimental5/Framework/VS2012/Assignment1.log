@@ -1,4 +1,4 @@
-﻿Build started 8/13/2015 11:44:38 AM.
+﻿Build started 8/13/2015 2:02:53 PM.
      1>Project "C:\Users\Paul\Documents\GitHub\COMP371-Project\Experimental5\Framework\VS2012\Assignment1.vcxproj" on node 2 (Build target(s)).
        Project file contains ToolsVersion="12.0". This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion="4.0". For more information, please see http://go.microsoft.com/fwlink/?LinkId=291333.
      1>ClCompile:
@@ -10,17 +10,17 @@
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
      1>c:\users\paul\documents\github\comp371-project\experimental5\framework\source\world.cpp(103): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>c:\users\paul\documents\github\comp371-project\experimental5\framework\source\world.cpp(341): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\paul\documents\github\comp371-project\experimental5\framework\source\world.cpp(343): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\paul\documents\github\comp371-project\experimental5\framework\source\world.cpp(347): warning C4305: '-=' : truncation from 'double' to 'float'
-     1>c:\users\paul\documents\github\comp371-project\experimental5\framework\source\world.cpp(349): warning C4305: '-=' : truncation from 'double' to 'float'
-     1>c:\users\paul\documents\github\comp371-project\experimental5\framework\source\world.cpp(456): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\paul\documents\github\comp371-project\experimental5\framework\source\world.cpp(342): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\paul\documents\github\comp371-project\experimental5\framework\source\world.cpp(344): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\paul\documents\github\comp371-project\experimental5\framework\source\world.cpp(348): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>c:\users\paul\documents\github\comp371-project\experimental5\framework\source\world.cpp(350): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>c:\users\paul\documents\github\comp371-project\experimental5\framework\source\world.cpp(457): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>c:\users\paul\documents\github\comp371-project\experimental5\framework\source\world.cpp(613): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\paul\documents\github\comp371-project\experimental5\framework\source\world.cpp(623): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>c:\users\paul\documents\github\comp371-project\experimental5\framework\source\world.cpp(617): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\paul\documents\github\comp371-project\experimental5\framework\source\world.cpp(627): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
-     1>c:\users\paul\documents\github\comp371-project\experimental5\framework\source\world.cpp(628): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>c:\users\paul\documents\github\comp371-project\experimental5\framework\source\world.cpp(638): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
          GLM: angleAxis function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
        Link:
@@ -60,4 +60,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.30
+Time Elapsed 00:00:03.62
