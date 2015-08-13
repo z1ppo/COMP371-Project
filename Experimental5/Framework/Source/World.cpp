@@ -239,6 +239,10 @@ World::World(int level)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glGenRenderbuffers(1, &depthrenderbuffer);
+	glBindRenderbuffer(GL_RENDERBUFFER, depthrenderbuffer);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, 1024, 768);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthrenderbuffer);
 	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, renderedTexture, 0);
 	GLenum DrawBuffers[1] = {GL_COLOR_ATTACHMENT0};
 	glDrawBuffers(1, DrawBuffers);
@@ -251,7 +255,7 @@ World::World(int level)
 	Renderer::SetShader(BLOOM);
 	quad_programID = Renderer::GetShaderProgramID();
 	Renderer::SetShader(oldShader);
-	GLuint texID = glGetUniformLocation(quad_programID, "renderedTexture");
+	texID = glGetUniformLocation(quad_programID, "renderedTexture");
 }
 
 World::~World()
@@ -471,9 +475,11 @@ void World::Update(float dt)
 
 void World::Draw()
 {
-	Renderer::BeginFrame();
 	glBindFramebuffer(GL_FRAMEBUFFER, FramebufferName);
 	glViewport(0,0,1024,768); // Render on the whole framebuffer, complete from the lower left corner to the upper right
+
+	Renderer::BeginFrame();
+	
 
 	
 
@@ -628,27 +634,33 @@ void World::Draw()
 	// 2D Text Alex
 	//Renderer::SetShader((ShaderType) prevShader);
 
-	glDisable(GL_DEPTH_TEST);
+	//glDisable(GL_DEPTH_TEST);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+	Renderer::CheckForErrors();
 		glViewport(0,0,1024,768); // Render on the whole framebuffer, complete from the lower left corner to the upper right
-
+		Renderer::CheckForErrors();
 		// Clear the screen
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+		Renderer::CheckForErrors();
 		// Use our shader
 		glUseProgram(quad_programID);
-
+		Renderer::CheckForErrors();
 		// Bind our texture in Texture Unit 0
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, renderedTexture);
+		Renderer::CheckForErrors();
 		// Set our "renderedTexture" sampler to user Texture Unit 0
-		glUniform1i(bloomtexID, 0);
-
+		glUniform1i(texID, 0);
+		Renderer::CheckForErrors();
 		//glUniform1f(timeID, (float)(glfwGetTime()*10.0f) );
 
 		// 1rst attribute buffer : vertices
 		glEnableVertexAttribArray(0);
+		Renderer::CheckForErrors();
 		glBindBuffer(GL_ARRAY_BUFFER, quad_vertexbuffer);
+		Renderer::CheckForErrors();
 		glVertexAttribPointer(
 			0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
 			3,                  // size
@@ -657,10 +669,10 @@ void World::Draw()
 			0,                  // stride
 			(void*)0            // array buffer offset
 		);
-
+		Renderer::CheckForErrors();
 		// Draw the triangles !
 		glDrawArrays(GL_TRIANGLES, 0, 6); // 2*3 indices starting at 0 -> 2 triangles
-
+		Renderer::CheckForErrors();
 		glDisableVertexAttribArray(0);
 		glEnable(GL_DEPTH_TEST);
 	Renderer::EndFrame();

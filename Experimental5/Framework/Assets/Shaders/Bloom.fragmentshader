@@ -26,22 +26,22 @@ void main()
 	{
 		for (j = -3; j < 3; j++)
 		{
-			tc += texture2D(myTextureSampler, UV + vec2(j, i)*0.004).rgb * 0.25;
+			tc += texture2D(myTextureSampler, UV + vec2(j, i)*0.004) * 0.25;
 		}
 	}
 	if (texture2D(myTextureSampler, UV).r < 0.3)
 	{
-		bcolor = tc*tc*0.01 + texture2D(myTextureSampler, UV).rgb;
+		bcolor = tc*tc*0.01 + texture2D(myTextureSampler, UV);
 	}
 	else
 	{
 		if (texture2D(myTextureSampler, UV).r < 0.5)
 		{
-			bcolor = tc*tc*0.008 + texture2D(myTextureSampler, UV).rgb;
+			bcolor = tc*tc*0.008 + texture2D(myTextureSampler, UV);
 		}
 		else
 		{
-			bcolor = tc*tc*0.0071 + texture2D(myTextureSampler, UV).rgb;
+			bcolor = tc*tc*0.0071 + texture2D(myTextureSampler, UV);
 		}
 	}
 

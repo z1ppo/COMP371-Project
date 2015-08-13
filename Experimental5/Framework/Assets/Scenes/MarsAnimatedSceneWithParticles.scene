@@ -295,7 +295,11 @@ position = 0.0 0.0 50.0
 name     = "EnemyShip"
 scaling  = 0.1 0.1 0.1
 position = 0.0 0.0 55.0
+[BackgroundSphere]
 
+name     = "BackgroundSphere"
+scaling  = 10.0 10.0 10.0
+position = -30 -20 25
 [Meteor]
 
 name     = "Meteor"
@@ -309,11 +313,7 @@ scaling  = 2.0 2.0 2.0
 position = 0 -45 25
 
 
-[BackgroundSphere]
 
-name     = "BackgroundSphere"
-scaling  = 10.0 10.0 10.0
-position = -30 -20 25
 
 [Sun]
 

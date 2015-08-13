@@ -138,9 +138,10 @@ public:
 
 	GLuint FramebufferName;
 	GLuint renderedTexture;
+	GLuint depthrenderbuffer;
 	GLenum DrawBuffers;
 	GLuint quad_vertexbuffer;
-	GLuint bloomtexID;
+	GLuint texID;
 	GLuint quad_programID;
     
 private:
