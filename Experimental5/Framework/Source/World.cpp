@@ -672,8 +672,8 @@ void World::Draw()
 		glm::vec2 shipOnScreen2 = vec2(shipOnScreen4.x/shipOnScreen4.w, shipOnScreen4.y/shipOnScreen4.w);
 		shipOnScreen2.x = (shipOnScreen2.x + 1.0f)*0.5f;
 		shipOnScreen2.y = (shipOnScreen2.y + 1.0f)*0.5f;
-		std::cout << shipOnScreen2.x<<endl;
-		std::cout << shipOnScreen2.y<<endl<<endl;
+		//std::cout << shipOnScreen2.x<<endl;
+		//std::cout << shipOnScreen2.y<<endl<<endl;
 		//std::cout << shockTime;
 		glUniform2f(shockCenter, shipOnScreen2.x,shipOnScreen2.y);
 		GLuint shockTimeID = glGetUniformLocation(quad_programID, "shockTime");
