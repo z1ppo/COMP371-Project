@@ -132,6 +132,16 @@ public:
 
 	void moveShiptailFlameDead();
 	void IncrementPlayerScore();
+
+
+
+
+	GLuint FramebufferName;
+	GLuint renderedTexture;
+	GLenum DrawBuffers;
+	GLuint quad_vertexbuffer;
+	GLuint bloomtexID;
+	GLuint quad_programID;
     
 private:
     static World* instance;

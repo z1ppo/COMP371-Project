@@ -118,8 +118,8 @@ void Renderer::Initialize()
 	// Alex
 
 	sShaderProgramID.push_back(
-                               LoadShaders(shaderPathPrefix + "Tex_Lighting2.vertexshader",
-                                           shaderPathPrefix + "Tex_Lighting2_Bloom.fragmentshader")
+                               LoadShaders(shaderPathPrefix + "Passthrough.vertexshader",
+                                           shaderPathPrefix + "Bloom.fragmentshader")
                                );
 	sCurrentShader = 0;
 

@@ -1,0 +1,50 @@
+#version 330 core
+
+
+
+
+
+in vec2 UV;
+
+
+// Ouput data
+out vec4 color;
+
+// Values that stay constant for the whole mesh.
+uniform sampler2D myTextureSampler;
+
+void main()
+{
+	vec4 textureColor = texture( myTextureSampler, UV );
+
+	
+	vec4 tc = vec4(0.0f);
+	int j;
+	int i;
+	vec4 bcolor;
+	for( i= -4 ;i < 4; i++)
+	{
+		for (j = -3; j < 3; j++)
+		{
+			tc += texture2D(myTextureSampler, UV + vec2(j, i)*0.004).rgb * 0.25;
+		}
+	}
+	if (texture2D(myTextureSampler, UV).r < 0.3)
+	{
+		bcolor = tc*tc*0.01 + texture2D(myTextureSampler, UV).rgb;
+	}
+	else
+	{
+		if (texture2D(myTextureSampler, UV).r < 0.5)
+		{
+			bcolor = tc*tc*0.008 + texture2D(myTextureSampler, UV).rgb;
+		}
+		else
+		{
+			bcolor = tc*tc*0.0071 + texture2D(myTextureSampler, UV).rgb;
+		}
+	}
+
+	color =  bcolor ;
+}
+

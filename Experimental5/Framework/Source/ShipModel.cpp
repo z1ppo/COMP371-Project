@@ -252,7 +252,7 @@ void ShipModel::Draw()
 	Renderer::CheckForErrors();
 
 	// Set shader constants
-	const float ka = 0.5f;
+	const float ka = 0.2f;
 	Renderer::CheckForErrors();
 	const float kd = 0.8f;
 	Renderer::CheckForErrors();

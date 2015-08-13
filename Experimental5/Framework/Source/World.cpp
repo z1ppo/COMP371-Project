@@ -65,6 +65,15 @@ char gameOverText[256]; // ALEX game over***********************
 
 //float playerScore = 0;
 // 2D Text Alex
+
+static const GLfloat g_quad_vertex_buffer_data[] = { 
+		-1.0f, -1.0f, 0.0f,
+		 1.0f, -1.0f, 0.0f,
+		-1.0f,  1.0f, 0.0f,
+		-1.0f,  1.0f, 0.0f,
+		 1.0f, -1.0f, 0.0f,
+		 1.0f,  1.0f, 0.0f,
+	};
 World::World(int level)
 {
 	gameInProgress = false;
@@ -217,6 +226,32 @@ World::World(int level)
 	planetScene = new sceneLoader("../Assets/Models/earthHD.obj");
 	heartScene = new sceneLoader("../Assets/Models/heart.obj");
 
+
+
+
+	FramebufferName = 0;
+	glGenFramebuffers(1, &FramebufferName);
+	glBindFramebuffer(GL_FRAMEBUFFER, FramebufferName);
+	glGenTextures(1, &renderedTexture);
+	glBindTexture(GL_TEXTURE_2D, renderedTexture);
+	glTexImage2D(GL_TEXTURE_2D, 0,GL_RGBA, 1024, 768, 0,GL_RGBA, GL_UNSIGNED_BYTE, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); 
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, renderedTexture, 0);
+	GLenum DrawBuffers[1] = {GL_COLOR_ATTACHMENT0};
+	glDrawBuffers(1, DrawBuffers);
+	if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+		printf("Framebuffer  not complete");
+	glGenBuffers(1, &quad_vertexbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, quad_vertexbuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_quad_vertex_buffer_data), g_quad_vertex_buffer_data, GL_STATIC_DRAW);
+	ShaderType oldShader = (ShaderType)Renderer::GetCurrentShader();
+	Renderer::SetShader(BLOOM);
+	quad_programID = Renderer::GetShaderProgramID();
+	Renderer::SetShader(oldShader);
+	GLuint texID = glGetUniformLocation(quad_programID, "renderedTexture");
 }
 
 World::~World()
@@ -437,7 +472,83 @@ void World::Update(float dt)
 void World::Draw()
 {
 	Renderer::BeginFrame();
+	glBindFramebuffer(GL_FRAMEBUFFER, FramebufferName);
+	glViewport(0,0,1024,768); // Render on the whole framebuffer, complete from the lower left corner to the upper right
+
 	
+
+
+	// Set shader to use
+	// Set shader to use
+	glUseProgram(Renderer::GetShaderProgramID());
+
+	// This looks for the MVP Uniform variable in the Vertex Program
+	GLuint VPMatrixLocation = glGetUniformLocation(Renderer::GetShaderProgramID(), "ViewProjectionTransform");
+
+	// Send the view projection constants to the shader
+	mat4 VP = mCamera[mCurrentCamera]->GetViewProjectionMatrix();
+	glUniformMatrix4fv(VPMatrixLocation, 1, GL_FALSE, &VP[0][0]);
+
+	// Draw models
+
+	//glFrustum(1000.0f, 1000.0f, 1000.0f, 1000.0f, 1000.0f, 1000.0f);
+	for (vector<Model*>::iterator it = mModel.begin(); it < mModel.end(); ++it)
+	{
+		(*it)->Draw();
+	}
+	mShipModel->Draw();
+	for (vector<ShipEnnemyModel*>::iterator it = mShipEnnemyModel.begin(); it < mShipEnnemyModel.end(); ++it)
+	{
+		(*it)->Draw();
+	}
+	for (vector<Projectile*>::iterator it = mProjectile.begin(); it < mProjectile.end(); ++it)
+	{
+		(*it)->Draw();
+	}
+
+	for (vector<PlayerProjectile*>::iterator it = mPlayerProjectile.begin(); it < mPlayerProjectile.end(); ++it)
+	{
+		(*it)->Draw();
+	}
+	for (vector<HeartModel*>::iterator it = mHeartModel.begin(); it < mHeartModel.end(); ++it)
+	{
+		(*it)->Draw();
+	}
+	//// Draw Path Lines
+	//
+	//// Set Shader for path lines
+	//unsigned int prevShader = Renderer::GetCurrentShader();
+	//Renderer::SetShader(SHADER_PATH_LINES);
+	//glUseProgram(Renderer::GetShaderProgramID());
+
+	//// Send the view projection constants to the shader
+	//VPMatrixLocation = glGetUniformLocation(Renderer::GetShaderProgramID(), "ViewProjectionTransform");
+	//glUniformMatrix4fv(VPMatrixLocation, 1, GL_FALSE, &VP[0][0]);
+
+	//for (vector<Animation*>::iterator it = mAnimation.begin(); it < mAnimation.end(); ++it)
+	//{
+	//	mat4 VP = mCamera[mCurrentCamera]->GetViewProjectionMatrix();
+	//	glUniformMatrix4fv(VPMatrixLocation, 1, GL_FALSE, &VP[0][0]);
+
+	//	(*it)->Draw();
+	//}
+
+	//for (vector<AnimationKey*>::iterator it = mAnimationKey.begin(); it < mAnimationKey.end(); ++it)
+	//{
+	//	mat4 VP = mCamera[mCurrentCamera]->GetViewProjectionMatrix();
+	//	glUniformMatrix4fv(VPMatrixLocation, 1, GL_FALSE, &VP[0][0]);
+
+	//	(*it)->Draw();
+	//}
+
+    Renderer::CheckForErrors();
+    
+    // Draw Billboards
+    mpBillboardList->Draw();
+
+
+	// Restore previous shader
+
 	// 2D Text Alex
 
 	//// Display screen texture
@@ -515,79 +626,43 @@ void World::Draw()
 	// ALEX MENU *********************************
 
 	// 2D Text Alex
-
-
-	// Set shader to use
-	// Set shader to use
-	glUseProgram(Renderer::GetShaderProgramID());
-
-	// This looks for the MVP Uniform variable in the Vertex Program
-	GLuint VPMatrixLocation = glGetUniformLocation(Renderer::GetShaderProgramID(), "ViewProjectionTransform");
-
-	// Send the view projection constants to the shader
-	mat4 VP = mCamera[mCurrentCamera]->GetViewProjectionMatrix();
-	glUniformMatrix4fv(VPMatrixLocation, 1, GL_FALSE, &VP[0][0]);
-
-	// Draw models
-
-	//glFrustum(1000.0f, 1000.0f, 1000.0f, 1000.0f, 1000.0f, 1000.0f);
-	for (vector<Model*>::iterator it = mModel.begin(); it < mModel.end(); ++it)
-	{
-		(*it)->Draw();
-	}
-	for (vector<ShipEnnemyModel*>::iterator it = mShipEnnemyModel.begin(); it < mShipEnnemyModel.end(); ++it)
-	{
-		(*it)->Draw();
-	}
-	for (vector<Projectile*>::iterator it = mProjectile.begin(); it < mProjectile.end(); ++it)
-	{
-		(*it)->Draw();
-	}
-
-	for (vector<PlayerProjectile*>::iterator it = mPlayerProjectile.begin(); it < mPlayerProjectile.end(); ++it)
-	{
-		(*it)->Draw();
-	}
-	for (vector<HeartModel*>::iterator it = mHeartModel.begin(); it < mHeartModel.end(); ++it)
-	{
-		(*it)->Draw();
-	}
-	//// Draw Path Lines
-	//
-	//// Set Shader for path lines
-	//unsigned int prevShader = Renderer::GetCurrentShader();
-	//Renderer::SetShader(SHADER_PATH_LINES);
-	//glUseProgram(Renderer::GetShaderProgramID());
-
-	//// Send the view projection constants to the shader
-	//VPMatrixLocation = glGetUniformLocation(Renderer::GetShaderProgramID(), "ViewProjectionTransform");
-	//glUniformMatrix4fv(VPMatrixLocation, 1, GL_FALSE, &VP[0][0]);
-
-	//for (vector<Animation*>::iterator it = mAnimation.begin(); it < mAnimation.end(); ++it)
-	//{
-	//	mat4 VP = mCamera[mCurrentCamera]->GetViewProjectionMatrix();
-	//	glUniformMatrix4fv(VPMatrixLocation, 1, GL_FALSE, &VP[0][0]);
-
-	//	(*it)->Draw();
-	//}
-
-	//for (vector<AnimationKey*>::iterator it = mAnimationKey.begin(); it < mAnimationKey.end(); ++it)
-	//{
-	//	mat4 VP = mCamera[mCurrentCamera]->GetViewProjectionMatrix();
-	//	glUniformMatrix4fv(VPMatrixLocation, 1, GL_FALSE, &VP[0][0]);
-
-	//	(*it)->Draw();
-	//}
-
-    Renderer::CheckForErrors();
-    
-    // Draw Billboards
-    mpBillboardList->Draw();
-
-
-	// Restore previous shader
 	//Renderer::SetShader((ShaderType) prevShader);
 
+	glDisable(GL_DEPTH_TEST);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glViewport(0,0,1024,768); // Render on the whole framebuffer, complete from the lower left corner to the upper right
+
+		// Clear the screen
+		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		// Use our shader
+		glUseProgram(quad_programID);
+
+		// Bind our texture in Texture Unit 0
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, renderedTexture);
+		// Set our "renderedTexture" sampler to user Texture Unit 0
+		glUniform1i(bloomtexID, 0);
+
+		//glUniform1f(timeID, (float)(glfwGetTime()*10.0f) );
+
+		// 1rst attribute buffer : vertices
+		glEnableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, quad_vertexbuffer);
+		glVertexAttribPointer(
+			0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+			3,                  // size
+			GL_FLOAT,           // type
+			GL_FALSE,           // normalized?
+			0,                  // stride
+			(void*)0            // array buffer offset
+		);
+
+		// Draw the triangles !
+		glDrawArrays(GL_TRIANGLES, 0, 6); // 2*3 indices starting at 0 -> 2 triangles
+
+		glDisableVertexAttribArray(0);
+		glEnable(GL_DEPTH_TEST);
 	Renderer::EndFrame();
 }
 

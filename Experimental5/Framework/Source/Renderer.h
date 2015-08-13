@@ -29,7 +29,7 @@ enum ShaderType
 	TEX_LIGHT2,
 	SHADER_TEXT_2D,
 	SHADER_2D,
-	TEX_BLOOM,
+	BLOOM,
 	NUM_SHADERS
 };
 

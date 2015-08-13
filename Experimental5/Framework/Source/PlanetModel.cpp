@@ -80,11 +80,9 @@ void PlanetModel::Draw()
 	// Note this draws a unit Cube
 	// The Model View Projection transforms are computed in the Vertex Shader
 	ShaderType oldShader = (ShaderType)Renderer::GetCurrentShader();
-	if(World::GetInstance()->currentLevel == 0){
-		Renderer::SetShader(TEX_BLOOM);
-	} else {
+
 		Renderer::SetShader(TEX_LIGHT2);	
-	}
+
 	Renderer::CheckForErrors();
     glUseProgram(Renderer::GetShaderProgramID());
 

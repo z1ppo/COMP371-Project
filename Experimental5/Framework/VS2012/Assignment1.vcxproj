@@ -170,6 +170,7 @@
     <None Include="..\Assets\Scenes\MarsAnimatedSceneWithParticles.scene" />
     <None Include="..\Assets\Scenes\MoonAnimatedSceneWithParticles.scene" />
     <None Include="..\Assets\Scenes\StaticScene.scene" />
+    <None Include="..\Assets\Shaders\Bloom.fragmentshader" />
     <None Include="..\Assets\Shaders\BlueColor.fragmentshader" />
     <None Include="..\Assets\Shaders\PathLines.fragmentshader" />
     <None Include="..\Assets\Shaders\PathLines.vertexshader" />
@@ -185,7 +186,6 @@
     <None Include="..\Assets\Shaders\Tex_Lighting.vertexshader" />
     <None Include="..\Assets\Shaders\Tex_Lighting2.fragmentshader" />
     <None Include="..\Assets\Shaders\Tex_Lighting2.vertexshader" />
-    <None Include="..\Assets\Shaders\Tex_Lighting2_Bloom.fragmentshader" />
     <None Include="..\Assets\Shaders\Tex_Lighting2_blur.fragmentshader" />
   </ItemGroup>
   <ItemGroup>
