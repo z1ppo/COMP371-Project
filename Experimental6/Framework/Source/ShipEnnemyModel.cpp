@@ -87,9 +87,10 @@ void ShipEnnemyModel::Update(float dt)
 		Fire();
 	}
 
-	if(mPosition.z < 2 && glm::distance(mPosition, World::GetInstance()->mModel[0]->GetPosition()) < 1.003){
+	if(mPosition.z < 2 && ExplosionCoef < 0 && glm::distance(mPosition, World::GetInstance()->mModel[0]->GetPosition()) < 1.003){
 		World::GetInstance()->mShipModel->Collision();
 		World::GetInstance()->mShipModel->Collision();
+		ExplosionCoef = dt;
 	}
 	if(!(ExplosionCoef < 0)){
 		ExplosionCoef+=dt;

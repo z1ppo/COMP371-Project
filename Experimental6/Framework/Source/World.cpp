@@ -256,7 +256,7 @@ World::World(int level)
 	quad_programID = Renderer::GetShaderProgramID();
 	Renderer::SetShader(oldShader);
 	texID = glGetUniformLocation(quad_programID, "renderedTexture");
-	shockTime = -1.0f;
+	shockTime = -0.7f;
 }
 
 World::~World()

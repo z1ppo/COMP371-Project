@@ -22,7 +22,7 @@
 int main(int argc, char*argv[])
 {
 
-	int level = 2;
+	int level = 0;
 	while (level < 4){ // MAKS Change level limit to 4
 		
 		if(level == 3) { level = 0; }
